@@ -58,3 +58,21 @@ void Video::addToVector(Video videoIn)
     //vector<Video> videos;
     videos.push_back(videoIn);
 }
+
+void Video::searchTitle(const videos[], string titleIn)
+{
+    int index = 0;
+    size = videos.size();
+    bool found = false;
+    while(index < size && !found)
+    {
+       if(videos[index].getTitle() == titleIn)
+       {
+          found = true;
+          result = videos[index]; 
+       }
+       index++;
+    }
+}
+
+    
