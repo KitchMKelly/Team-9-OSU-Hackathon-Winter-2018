@@ -16,7 +16,8 @@ void displayMainMenu()
     std::cout << "3. Search by Director" << std::endl;
     std::cout << "4. Check Cart" << std::endl;
     std::cout << "5. Calculate Total" << std::endl;
-    std::cout << "6. Exit" << std::endl;
+    std::cout << "6. Exit" << std::endl << std::endl;
+    std::cout << "Choice: ";
 }
 void displayGenreMenu()
 {
@@ -31,9 +32,10 @@ void displayGenreMenu()
     std::cout << "7. ROMANCE" << std::endl;
     std::cout << "8. SCIFI" << std::endl;
     std::cout << "9. OTHER" << std::endl;    
-    std::cout << "0. Return to Main Menu" << std::endl;    
+    std::cout << "10. Return to Main Menu" << std::endl << std::endl;
+    std::cout << "Choice: ";    
 }
-void displayActorMenu()
+void displayActorMenu() //not sure if we actually need this
 {
     std::cout << "You have selected Search by Actor" << std::endl << std::endl;
     std::cout << "Please enter a name (first last), or enter 0 to return to the Main Menu:" << std::endl;
@@ -51,7 +53,7 @@ double calculateTotal()
 {
 
 }
-void validateMenuChoice(int choice, int maxChoice)
+void validateMenuChoice(int &choice, int maxChoice)
 {
     while(!std::cin || choice < 1 || choice > maxChoice)
     {

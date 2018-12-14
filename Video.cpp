@@ -15,7 +15,7 @@ Video::Video()  //default constructor with junk values
     actor = "AAA";
     price = -100;
 }
-Video::Video(string titleIn, Genre genreIn, string directorIn, string actorIn, double priceIn)
+Video::Video(std::string titleIn, Genre genreIn, std::string directorIn, std::string actorIn, double priceIn)
 {
     title = titleIn;
     genre = genreIn;
@@ -23,7 +23,7 @@ Video::Video(string titleIn, Genre genreIn, string directorIn, string actorIn, d
     actor = actorIn;
     price = priceIn;
 }
-string Video::getTitle()
+std::string Video::getTitle()
 {
     return title;
 }
@@ -31,11 +31,11 @@ Genre Video::getGenre()
 {
     return genre;
 }
-string Video::getDirector()
+std::string Video::getDirector()
 {
     return director;
 }
-string Video::getActor()
+std::string Video::getActor()
 {
     return actor;
 }

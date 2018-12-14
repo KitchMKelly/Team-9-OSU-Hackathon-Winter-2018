@@ -16,7 +16,7 @@ class Video
         std::string title;
         Genre genre;
         std::string director;
-        std::string actor;
+        std::string actor;  //not sure if we need this, our dataset only has 1 per movie...
         double price;  //if we're making everything the same price we might not need this
 
     public:
