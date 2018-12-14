@@ -23,18 +23,19 @@ int main()
 		cout << "Error: The file did not open" << endl;
 	else
 	{
-		while(movie_data.good())
+		while(getline(movie_data, title, ',') && getline(movie_data, genre, ',') && getline(movie_data, director, ',') && getline(movie_data, actor))
 		{
                 	numLines += 1;
-                	getline(movie_data, title, ',');
+                	/*getline(movie_data, title, ',');
                         getline(movie_data, genre, ',');
                         getline(movie_data, director, ',');
                         getline(movie_data, actor, '\n'); 
-		
+			*/
 			cout << "Title: " << title << ", Genre: " << genre << ", Director: " << director << ", Main Actor/Actress: " << actor << endl;  
                 cout << "total movies is" << numLines << endl;
+		//movie_data.close(); //test single line
 		}
-		movie_data.close();
+		movie_data.close(); //test all lines
         }
 
 	return 0;
