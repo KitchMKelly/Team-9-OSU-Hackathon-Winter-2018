@@ -8,6 +8,7 @@ at the BeaverHacks Winter 2018 Hackathon.
 #include <ctype.h>
 #include <vector>
 #include <fstream>
+#include <cstdlib>
 #include "Video.hpp"
 #include "Cart.hpp"
 
