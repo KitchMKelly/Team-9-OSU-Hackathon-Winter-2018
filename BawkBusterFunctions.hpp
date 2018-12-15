@@ -22,15 +22,6 @@ takes a vector of viedos by reference, fills with movie info from file
 
 bool importMovieDataFromFile(std::vector<Video> &videoList);
 
-/*
-mainMenu()
-Main function that manages the user's access to submenus.
-Allows user to select a submenu choice.
-*/
-
-<<<<<<< HEAD
-void mainMenu(std::vector<Video> &videoList);
-=======
 /****************************************************************************************
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
@@ -63,8 +54,7 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu();
->>>>>>> 181aa59ef2cb18438b716074538fb96da6ed3301
+void mainMenu(std::vector<Video> &videoList);
 
 /*
 displayMainMenu()
