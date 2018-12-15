@@ -52,7 +52,7 @@ Displays the main menu choices for the user to choose from
 
 void displayMainMenu()
 {
-	system("CLS");	//Clear screen before displaying menu
+	//system("CLS");	//Clear screen before displaying menu
 	cout << "Welcome to BawkBuster!\n" << endl;
 	cout << "Select on of the following options:\n" << endl;
 	cout << "1: Search movies by Title" << endl;
@@ -104,7 +104,7 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	system("CLS");				//Clear screen before displaying menu
+	//system("CLS");				//Clear screen before displaying menu
 	cout << "Search Movies by: Title\n" << endl;
 	cout << "Enter the title of the movie you are searching for,\n" 
 		<< "or enter '0' to return to Main Menu." << endl;
@@ -117,14 +117,14 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 		titleSearchVector(videoList, results, title);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Movie not found\n" << endl;
 		}
 		else
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Movie found!!\n";  //results now holds the movie!!
-			addToCart();				//User decides if (s)he wants to add the movie to the cart,
+			addToCart(results);				//User decides if (s)he wants to add the movie to the cart,
 										//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -157,29 +157,79 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart()
+void addToCart(std::vector<Video> &results)
 {
 	char addDecision;		//variable to hold user choice
-	cout << "Would you like to add this movie to your cart? (Y/N)" << endl;
-	cin >> addDecision;
-	
-	//Verify user input
-	while (!(cin >> addDecision) || (toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+	Cart newCart;
+	for(int index = 0; index < (results.size()); index++)
 	{
-		cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
-		cout << "or enter 'N' to start a new search." << endl;
+		Video vid = results[index];
+		cout << index + 1 << ". " << vid.getTitle() << endl;
+	}
+	cout << "There are " << results.size() << " search results" << endl;
+	if(results.size() > 1)
+	{
+		cout << "Would you like to add one of these movies  to your cart? (Y/N)" << endl;
 		cin >> addDecision;
+		//Verify user input
+		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+		{	
+			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
+			cout << "or enter 'N' to start a new search." << endl;
+			cin >> addDecision;
+		}		
+		//Action based on user input
+		if (toupper(addDecision) == 'Y')
+		{
+			int movieNumber = 0;
+			cout << "Please enter the movie number you would like to add." << endl;
+			cout << "For example, if you wish to add result 1. Avatar to the cart, type 1" << endl;
+			cin >> movieNumber;	
+			if(movieNumber = 0 || movieNumber > results.size())
+			{
+				cout << "Try again, options are 1 though " << results.size()  << endl;
+				cin >> movieNumber;
+			}
+			else
+			{
+				Video vid = results[movieNumber - 1];
+				newCart.addVidToCart(vid);
+				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
+				//TODO send back to main menu?
+			}
+		}	
+		if(toupper(addDecision) == 'N')
+		{
+			cout << "No movies added to your cart, returning to main menu" << endl;			
+		}
+				
 	}
+	else
+	{
+		cout << "Would you like to add this movie to your cart? (Y/N)" <<endl;
+		cin >> addDecision;
+	
+		//Verify user input
+		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+		{
+			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
+			cout << "or enter 'N' to start a new search." << endl;
+			cin >> addDecision;
+		}		
 
-	//Action based on user input
-	if (toupper(addDecision) == 'Y')
-	{
-		//add movie to cart
-		//display confirmation message ("movieName" was added to your cart!)
-	}
-	else if (toupper(addDecision) == 'N')
-	{
-		//display confirmation message ("movieName" was not added to your cart!)
+		//Action based on user input
+		if (toupper(addDecision) == 'Y')
+		{
+			cout << "in the Yes decision" << endl;
+			Video vid = results[0];
+			newCart.addVidToCart(vid);
+			cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
+			//TODO send back to main menu?
+		}
+		else if (toupper(addDecision) == 'N')
+		{
+			cout << "No movies added to your cart, returning to main menu" << endl;			
+		}
 	}
 }
 
@@ -230,18 +280,18 @@ void genreSearchMain(vector<Video>& videoList)
 		genreSearchVector(videoList, results, genre);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Nothing found!\n" << endl;
 		}
 		else
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Movies found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
 				cout << i << ". " << results[i].getTitle() << endl;
 			}
-			addToCart();	//User decides if (s)he wants to add the movie to the cart,
+			addToCart(results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -265,7 +315,7 @@ void displayGenreSearchMenu()
 {
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	system("CLS");	//Clear screen before displaying menu
+	//system("CLS");	//Clear screen before displaying menu
 	cout << "Search Movies by: Genre\n" << endl;
 	cout << "What genre of movie are you interested in watching?\n" << endl;
 	cout << "1: Action" << endl;
@@ -344,18 +394,18 @@ void directorSearchMain(vector<Video>& videoList)
 		directorSearchVector(videoList, results, director);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Director not found\n" << endl;
 		}
 		else
 		{
-			system("CLS");
+			//system("CLS");
 			cout << "Movies by " << director <<" found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
 				cout << i << ". " << results[i].getTitle() << endl;
 			}
-			addToCart();	//User decides if (s)he wants to add the movie to the cart,
+			addToCart(results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -374,7 +424,7 @@ The user arrives at this menu from the main menu if
 
 void displayDirectorSearchMenu()
 {
-	system("CLS");	//Clear screen before displaying menu
+	//system("CLS");	//Clear screen before displaying menu
 	cout << "Search movies by: Director\n" << endl;
 	cout << "Enter the name of the director,\n"
 		<< "or type 'exit' to return to the main menu." << endl;
@@ -427,10 +477,10 @@ The user arrives at this menu from the main menu if
 
 void displayMoviesInCart()
 {
-	system("CLS");	//Clear screen before displaying menu
+	//system("CLS");	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
 	//TODO: Show what's in the user's cart
-	system("pause");	//Wait for user to press 'enter'
+	//system("pause");	//Wait for user to press 'enter'
 }
 
 /****************************************************************************************
@@ -465,7 +515,7 @@ void displayPrice()
 	cout << "Current price of the movies in your cart:\n" << 
 		//whatever variable holds total price <<
 		endl;
-	system("pause");	//Waits for user to press 'enter'
+	//system("pause");	//Waits for user to press 'enter'
 						//before returning to main menu
 }
 
@@ -498,6 +548,6 @@ void displayCheckOut()
 		//whatever variable is used for total price <<
 		endl;
 	cout << "Enjoy your movies!" << endl;
-	system("pause");	//Waits for user to press "enter"
+	//system("pause");	//Waits for user to press "enter"
 						//before exiting program.
 }

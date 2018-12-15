@@ -76,7 +76,7 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart();
+void addToCart(std::vector<Video> &results);
 
 /****************************************************************************************
 Genre Search Submenu Functions
