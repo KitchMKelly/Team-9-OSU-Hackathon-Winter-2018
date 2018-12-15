@@ -581,14 +581,7 @@ void displayMoviesInCart()
 		cout << inCart[index].getTitle << endl;
 	}
 	//TODO: Show what's in the user's cart
-<<<<<<< HEAD
-	//system("pause");	//Wait for user to press 'enter'
-	cin.ignore(1024, '\n');
-	cout << "Press enter to continue" << endl;
-	cin.get();
-=======
 	systemPause();	//Wait for user input
->>>>>>> 6cdf0703c98eeeaf768e082e314f28363d52cc71
 }
 
 /****************************************************************************************
@@ -623,13 +616,8 @@ void displayPrice()
 	cout << "Current price of the movies in your cart:\n" << 
 		//whatever variable holds total price <<
 		endl;
-<<<<<<< HEAD
-	system("pause");	//Waits for user to press 'enter'
-						//before returning to main menu
-=======
 	systemPause();	//Waits for user input
 			//before returning to main menu
->>>>>>> 6cdf0703c98eeeaf768e082e314f28363d52cc71
 }
 
 /****************************************************************************************
