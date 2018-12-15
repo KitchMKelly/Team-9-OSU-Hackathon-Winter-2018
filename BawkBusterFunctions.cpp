@@ -237,6 +237,8 @@ void addToCart(std::vector<Video> &results)
 		//Verify user input
 		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
 		{	
+			cin.clear();	//Clear bad input flag
+			cin.ignore(10000, '\n');	//Discard input
 			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
 			cout << "or enter 'N' to start a new search." << endl;
 			cin >> addDecision;
@@ -247,15 +249,20 @@ void addToCart(std::vector<Video> &results)
 			int movieNumber = 0;
 			cout << "Please enter the movie number you would like to add." << endl;
 			cout << "For example, if you wish to add result 1. Avatar to the cart, type 1" << endl;
-			cin >> movieNumber;	
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cin >> movieNumber;
 			if(movieNumber = 0 || movieNumber > results.size())
 			{
 				cout << "Try again, options are 1 though " << results.size()  << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
 				cin >> movieNumber;
 			}
 			else
 			{
-				Video vid = results[movieNumber - 1];
+				Video vid = results[(movieNumber - 1)];
+				cout << "video title is " << vid.getTitle() << endl;
 				newCart.addVidToCart(vid);
 				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
 				//TODO send back to main menu?
@@ -263,6 +270,8 @@ void addToCart(std::vector<Video> &results)
 		}	
 		if(toupper(addDecision) == 'N')
 		{
+			cin.clear();
+			cin.ignore(1000, '\n');
 			cout << "No movies added to your cart, returning to main menu" << endl;			
 		}
 				
@@ -275,6 +284,8 @@ void addToCart(std::vector<Video> &results)
 		//Verify user input
 		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
 		{
+			//cin.clear();	//Clear bad input flag
+			//cin.ignore(10000, '\n');	//Discard input
 			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
 			cout << "or enter 'N' to start a new search." << endl;
 			cin >> addDecision;
@@ -283,15 +294,18 @@ void addToCart(std::vector<Video> &results)
 		//Action based on user input
 		if (toupper(addDecision) == 'Y')
 		{
-			cout << "in the Yes decision" << endl;
+			cin.clear();
+			cin.ignore(1000,'\n');
 			Video vid = results[0];
 			newCart.addVidToCart(vid);
-			cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
+			cout << vid.getTitle() << " was added to your cart! Returning to search by Title menu" << endl;
 			//TODO send back to main menu?
 		}
 		else if (toupper(addDecision) == 'N')
 		{
-			cout << "No movies added to your cart, returning to main menu" << endl;			
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "No movies added to your cart, returning to search by Title menu" << endl;			
 		}
 	}
 }
@@ -524,6 +538,7 @@ Possibly allows user to check out from here?
 
 void moviesInCartMain()
 {
+	clear_screen();
 	displayMoviesInCart();
 	//TODO: Allow users to remove movies from cart
 	//TODO: Function to display price here?
@@ -540,10 +555,20 @@ The user arrives at this menu from the main menu if
 
 void displayMoviesInCart()
 {
+	Cart current;
 	clear_screen();	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
+	std::vector<Video> inCart;
+	inCart = current.getVideos();
+	for(int index = 0; index < inCart.size(); index++)
+	{
+		cout << inCart[index].getTitle << endl;
+	}
 	//TODO: Show what's in the user's cart
 	//system("pause");	//Wait for user to press 'enter'
+	cin.ignore(1024, '\n');
+	cout << "Press enter to continue" << endl;
+	cin.get();
 }
 
 /****************************************************************************************
@@ -578,7 +603,7 @@ void displayPrice()
 	cout << "Current price of the movies in your cart:\n" << 
 		//whatever variable holds total price <<
 		endl;
-	//system("pause");	//Waits for user to press 'enter'
+	system("pause");	//Waits for user to press 'enter'
 						//before returning to main menu
 }
 

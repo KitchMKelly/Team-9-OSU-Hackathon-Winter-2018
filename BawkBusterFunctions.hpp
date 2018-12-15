@@ -28,9 +28,9 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 void mainMenu(std::vector<Video> &videoList);
-=======
+//=======
 /****************************************************************************************
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
@@ -52,8 +52,8 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu();
->>>>>>> 181aa59ef2cb18438b716074538fb96da6ed3301
+//void mainMenu();
+//>>>>>>> 181aa59ef2cb18438b716074538fb96da6ed3301
 
 /*
 displayMainMenu()
