@@ -123,7 +123,7 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 		else
 		{
 			system("CLS");
-			cout << "Movie found!!\n";  //result now holds the address of the movie!!
+			cout << "Movie found!!\n";  //results now holds the movie!!
 			addToCart();				//User decides if (s)he wants to add the movie to the cart,
 										//and continues searching.
 		}
@@ -195,10 +195,60 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain()
+void genreSearchMain(vector<Video>& videoList)
 {
+	vector<Video> results;		//Initialize an empty vector of movie results
+	int genreChoice = 0;		//Initalize new string to hold user input
+	string genre = "";
+
 	displayGenreSearchMenu();
-	//TODO: Switch to direct searches by genre
+	cin >> genreChoice;			//Get user input, store in 'genreChoice'
+	validateGenreMenuChoice(genreChoice);
+	
+	switch(genreChoice) 
+	{
+		case 1: genre = "Action";
+			break;
+		case 2: genre = "Adventure"; 
+			break;		
+		case 3: genre = "Comedy"; 
+			break;
+		case 4: genre = "Romance"; 
+			break;
+		case 5: genre = "Horror"; 
+			break;
+		case 6: genre = "Animated"; 
+			break;
+		case 7: genre = "Other"; //this one is going to be more complicated
+			break;				 //since we can't do a simple text match		
+	}		
+
+	while (genreChoice != 0)	//As long as the user doesn't enter '0',
+								//(s)he can search as many times as desired.
+	{							
+		//search for movie titles, return results (if any)
+		genreSearchVector(videoList, results, genre);
+		if (results.empty())  //if results is empty, we didn't find it
+		{
+			system("CLS");
+			cout << "Nothing found!\n" << endl;
+		}
+		else
+		{
+			system("CLS");
+			cout << "Movies found:\n";  //results now holds the movie!!
+			for (int i = 0; i < results.size(); i++)
+			{
+				cout << i << ". " << results[i].getTitle() << endl;
+			}
+			addToCart();	//User decides if (s)he wants to add the movie to the cart,
+							//and continues searching.
+		}
+		results.clear(); //delete everything from the vector to prepare for the next search
+		cout << "Please enter another movie title,\n"
+			 << "or enter '0' to return to Main Menu." << endl;
+		//getline(cin, title);
+	}	
 	//TODO: Function to add individual movies from the searched genre to the cart
 	//TODO: Function to allow multiple searches of different genres
 	//TODO: Function to return to main menu
@@ -213,35 +263,55 @@ The user arrives at this menu from the main menu if
 
 void displayGenreSearchMenu()
 {
+	cin.clear();				//Clear bad input flag
+	cin.ignore(10000, '\n');	//Discard input
 	system("CLS");	//Clear screen before displaying menu
 	cout << "Search Movies by: Genre\n" << endl;
 	cout << "What genre of movie are you interested in watching?\n" << endl;
-	cout << "1: Action/Adventure" << endl;
-	cout << "2: Comedy" << endl;
-	cout << "3: Romance" << endl;
-	cout << "4: Horror" << endl;
-	cout << "5: Animated" << endl;
-	cout << "6: Other" << endl;
-	cout << "7: Return to Main Menu\n" << endl;
-	cout << "Please enter a choice between 1 and 7" << endl;
+	cout << "1: Action" << endl;
+	cout << "2: Adventure" << endl;  //split Action and Adventure into separate categories
+	cout << "3: Comedy" << endl;
+	cout << "4: Romance" << endl;
+	cout << "5: Horror" << endl;
+	cout << "6: Animated" << endl;
+	cout << "7: Other" << endl;
+	cout << "0: Return to Main Menu\n" << endl;  //changed 8 to 0 for consistency with title search
+	cout << "Please enter a choice between 0 and 7" << endl;
 }
+
 
 /*
 void validateGenreMenuChoice(int &choice)
 Validates user input for the search by genre menu.
 Works similar to "validateMainMenuChoice" function,
-but accepts integers from 1 to 7.
+but accepts integers from 0 to 7.
 */
 
 void validateGenreMenuChoice(int &choiceGenre)
 {
-	while (!(cin >> choiceGenre) || choiceGenre > 7 || choiceGenre < 1)
+	while (!cin || choiceGenre > 7 || choiceGenre < 0)
 	{
 		cin.clear();
 		cin.ignore(10000, '\n');
-		cout << "Please enter a choice between 1 and 7" << endl;
+		cout << "Please enter a choice between 0 and 7" << endl;
 		cin >> choiceGenre;
 	}
+}
+
+
+void genreSearchVector(const vector<Video>& videos, vector<Video>& results, string genreIn)  
+//takes a const vector of movies to search, a vector of videos to add results to, and a search term.
+{
+    Video temp;  //creates a temporary video to hold values as we process vector
+    int index = 0;
+    int size = videos.size();
+    while(index < size)
+    {
+       	temp = videos[index];  //set temp equal to the video at [index]
+       	if(temp.getGenre() == genreIn)
+    		results.push_back(videos[index]);  //if video is found, add it to results
+       	index++;
+    }
 }
 
 /****************************************************************************************
@@ -257,13 +327,42 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain()
+void directorSearchMain(vector<Video>& videoList)
 {
+	vector<Video> results;		//Initialize an empty vector of movie results
+	string director = "";			//Initalize new string to hold user input
+
+	cin.clear();				//Clear bad input flag
+	cin.ignore(10000, '\n');	//Discard input
 	displayDirectorSearchMenu();
-	//TODO: Accept user input and search dataset using the user's input
-	//TODO: Function to add individual movies to cart
-	//TODO: Function to allow multiple searches
-	//TODO: Function to return to main menu
+
+	getline(cin, director);		//Get user input, store in 'title'
+	while (director != "0")		//As long as the user doesn't enter '0',
+								//(s)he can search as many times as desired.
+	{							
+		//search for movie directors, return results (if any)
+		directorSearchVector(videoList, results, director);
+		if (results.empty())  //if results is empty, we didn't find it
+		{
+			system("CLS");
+			cout << "Director not found\n" << endl;
+		}
+		else
+		{
+			system("CLS");
+			cout << "Movies by " << director <<" found:\n";  //results now holds the movie!!
+			for (int i = 0; i < results.size(); i++)
+			{
+				cout << i << ". " << results[i].getTitle() << endl;
+			}
+			addToCart();	//User decides if (s)he wants to add the movie to the cart,
+							//and continues searching.
+		}
+		results.clear(); //delete everything from the vector to prepare for the next search
+		cout << "Please enter another director,\n"
+			 << "or enter '0' to return to Main Menu." << endl;
+		getline(cin, director);
+	}
 }
 
 /*
@@ -279,6 +378,21 @@ void displayDirectorSearchMenu()
 	cout << "Search movies by: Director\n" << endl;
 	cout << "Enter the name of the director,\n"
 		<< "or type 'exit' to return to the main menu." << endl;
+}
+
+void directorSearchVector(const vector<Video>& videos, vector<Video>& results, string directorIn)  
+//takes a const vector of movies to search, a vector of videos to add results to, and a search term.
+{
+    Video temp;  //creates a temporary video to hold values as we process vector
+    int index = 0;
+    int size = videos.size();
+    while(index < size)
+    {
+       	temp = videos[index];  //set temp equal to the video at [index]
+       	if(temp.getDirector() == directorIn)
+    		results.push_back(videos[index]);  //if video is found, add it to results
+       	index++;
+    }
 }
 
 /****************************************************************************************

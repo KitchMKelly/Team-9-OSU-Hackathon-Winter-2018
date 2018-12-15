@@ -24,9 +24,9 @@ int main()
         if (mainMenuChoice == 1)  //title search
             titleSearchMain(videoList);
         else if (mainMenuChoice == 2)  //genre search
-            genreSearchMain();
+            genreSearchMain(videoList);
         else if (mainMenuChoice == 3)  //director search
-            directorSearchMain();
+            directorSearchMain(videoList);
         else if (mainMenuChoice == 4)  //check cart
             moviesInCartMain();
         else if (mainMenuChoice == 5)  //calculate total

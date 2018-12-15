@@ -90,7 +90,7 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain();
+void genreSearchMain(std::vector<Video>& videoList);
 
 /*
 void displayGenreSearchMenu()
@@ -105,10 +105,19 @@ void displayGenreSearchMenu();
 void validateGenreMenuChoice(int &choice)
 Validates user input for the search by genre menu.
 Works similar to "validateMainMenuChoice" function,
-but accepts integers from 1 to 7.
+but accepts integers from 0 to 7.
 */
 
 void validateGenreMenuChoice(int &choiceGenre);
+
+
+/*
+search function for genre, takes in vector of movies to search,
+a vector of results to fill, and a genre string to search for
+*/
+void genreSearchVector( const std::vector<Video>& videos, 
+                        std::vector<Video>& results, 
+                        std::string genreIn);
 
 /****************************************************************************************
 Director Search Submenu Functions
@@ -123,7 +132,7 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain();
+void directorSearchMain(std::vector<Video>& videoList);
 
 /*
 void displayDirectorSearchMenu()
@@ -133,6 +142,10 @@ The user arrives at this menu from the main menu if
 */
 
 void displayDirectorSearchMenu();
+
+void directorSearchVector(  const std::vector<Video>& videos, 
+                            std::vector<Video>& results, 
+                            std::string directorIn);
 
 /****************************************************************************************
 Movies In Cart Submenu Functions
