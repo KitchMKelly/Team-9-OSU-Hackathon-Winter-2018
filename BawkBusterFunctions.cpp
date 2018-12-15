@@ -4,6 +4,8 @@ at the BeaverHacks Winter 2018 Hackathon.
 */
 
 #include "BawkBusterFunctions.hpp"
+#include <cstdlib>
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -46,6 +48,25 @@ bool importMovieDataFromFile(vector<Video> &videoList)
 }
 
 /****************************************************************************************
+Clear Screen Function For Linux and Windows OS's
+****************************************************************************************/
+/*
+clear_screen()
+Function to remove all text from the console screen
+that functions with Windows and Linux operating systems.
+*/
+
+void clear_screen()
+{
+	#ifdef WINDOWS
+		std::system("cls");
+	#else
+		//Assume POSIX
+		std::system("clear");
+	#endif
+}
+
+/****************************************************************************************
 Main Menu Functions
 ****************************************************************************************/
 
@@ -71,7 +92,7 @@ Displays the main menu choices for the user to choose from
 
 void displayMainMenu()
 {
-	//system("CLS");	//Clear screen before displaying menu
+	clear_screen();	//Clear screen before displaying menu
 	cout << "Welcome to BawkBuster!\n" << endl;
 	cout << "Select on of the following options:\n" << endl;
 	cout << "1: Search movies by Title" << endl;
@@ -147,7 +168,7 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	//system("CLS");				//Clear screen before displaying menu
+	clear_screen();				//Clear screen before displaying menu
 	cout << "Search Movies by: Title\n" << endl;
 	cout << "Enter the title of the movie you are searching for,\n" 
 		<< "or enter '0' to return to Main Menu." << endl;
@@ -160,12 +181,12 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 		titleSearchVector(videoList, results, title);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Movie not found\n" << endl;
 		}
 		else
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Movie found!!\n";  //results now holds the movie!!
 			addToCart(results);				//User decides if (s)he wants to add the movie to the cart,
 										//and continues searching.
@@ -220,7 +241,7 @@ void addToCart(std::vector<Video> &results)
 			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
 			cout << "or enter 'N' to start a new search." << endl;
 			cin >> addDecision;
-		}		
+		}
 		//Action based on user input
 		if (toupper(addDecision) == 'Y')
 		{
@@ -323,12 +344,12 @@ void genreSearchMain(vector<Video>& videoList)
 		genreSearchVector(videoList, results, genre);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Nothing found!\n" << endl;
 		}
 		else
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Movies found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
@@ -358,7 +379,7 @@ void displayGenreSearchMenu()
 {
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	//system("CLS");	//Clear screen before displaying menu
+	clear_screen();	//Clear screen before displaying menu
 	cout << "Search Movies by: Genre\n" << endl;
 	cout << "What genre of movie are you interested in watching?\n" << endl;
 	cout << "1: Action" << endl;
@@ -437,12 +458,12 @@ void directorSearchMain(vector<Video>& videoList)
 		directorSearchVector(videoList, results, director);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Director not found\n" << endl;
 		}
 		else
 		{
-			//system("CLS");
+			clear_screen();
 			cout << "Movies by " << director <<" found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
@@ -467,7 +488,7 @@ The user arrives at this menu from the main menu if
 
 void displayDirectorSearchMenu()
 {
-	//system("CLS");	//Clear screen before displaying menu
+	clear_screen();	//Clear screen before displaying menu
 	cout << "Search movies by: Director\n" << endl;
 	cout << "Enter the name of the director,\n"
 		<< "or type 'exit' to return to the main menu." << endl;
@@ -520,7 +541,7 @@ The user arrives at this menu from the main menu if
 
 void displayMoviesInCart()
 {
-	//system("CLS");	//Clear screen before displaying menu
+	clear_screen();	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
 	//TODO: Show what's in the user's cart
 	//system("pause");	//Wait for user to press 'enter'
