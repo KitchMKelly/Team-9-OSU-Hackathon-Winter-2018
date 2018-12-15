@@ -22,14 +22,13 @@ Cart::Cart()
 }
 
 /*****************************************************************************
-** Description:	A method that takes the video vector and counts the number of
-**		videos in the vector, then sets that number to the numCart
-**		data member.
+** Description:	A method that takes an int and sets it to the numCart data
+**		member
 *****************************************************************************/
 
-void Cart::setNumCart(std::vector<Video> vidInput);
+void Cart::setNumCart(int input)
 {
-	numCart = vidInput.size();
+	numCart = input;
 }
 
 /*****************************************************************************
@@ -46,17 +45,18 @@ int Cart::getNumCart()
 **		cart and sets it to the totalPrice data member.
 *****************************************************************************/
 
-void Cart::setTPrice(std::vector<Video> vidInput)
+void Cart::setTPrice()
 {
-	// Loop through the vector of Videos
-	for (index = 0; index < vidInput.size(); index++)
+	/*// Loop through the vector of Videos
+	for (int index = 0; index < vidInput.size(); index++)
 	{
 	totalPrice += vidInput.getPrice;
 	}
+	*/
 
 	//!!!!!!!IF THE PRICE IS A GLOBAL VARIABLE THIS FUNCTION CAN BE 
 	//RE-WRITTEN AS!!!
-	//totalPrice = PRICE*numCart;
+	totalPrice = PRICE*numCart;
 }
 
 /*****************************************************************************
@@ -70,12 +70,14 @@ double Cart::getTPrice()
 
 /*****************************************************************************
 ** Description: A method that adds a Video object to the Video vector data
-**		member.
+**		member and updates the other data members
 *****************************************************************************/
 
 void Cart::addVidToCart(Video videoIn)
 {
 	vidVector.push_back(videoIn);
+	numCart++;
+	totalPrice += PRICE; //adds the price after every additional video is put in;
 }
 
 /*****************************************************************************
@@ -94,6 +96,8 @@ std::vector<Video> Cart::getVideos()
 void Cart::emptyCart()
 {
 	vidVector.clear();
+	numCart = 0;
+	totalPrice = 0;
 }
 
 /*****************************************************************************
@@ -103,18 +107,25 @@ void Cart::emptyCart()
 void Cart::unAddToCart()
 {
 	vidVector.pop_back();
+	numCart--;
+	totalPrice -= PRICE;
 }
 
 /*****************************************************************************
+** THIS MIGHT BE PLACED INTO A MENU FUNCTION
 ** Description: A method that prints the title of all the video objects in
 **		the cart
 *****************************************************************************/
-
+/*
 void Cart::printCart()
 {
 	std::cout << "You have the following items in your cart\n";
-	for (index = 0; index < vidVector.size(); index++)
+	for (int index = 0; index < vidVector.size(); index++)
 	{
-	std::cout << vidVector[index].getTitle << std::endl;
+	Video tempVid = vidVector[index];
+	std::string tempString = tempVid.getTitle;
+
+	std::cout << tempString << std::endl;
 	}
 }
+*/

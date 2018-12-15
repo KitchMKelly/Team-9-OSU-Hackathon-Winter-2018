@@ -3,6 +3,7 @@
 #include <vector>
 #include "Menu.hpp"
 #include "Video.hpp"
+#include "Cart.hpp"
 
 using std::cout;
 using std::cin;
