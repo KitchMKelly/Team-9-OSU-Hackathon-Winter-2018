@@ -2,32 +2,47 @@
 This file contains the functions used in the BawkBuster submission
 at the BeaverHacks Winter 2018 Hackathon.
 */
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <ctype.h>
+
+#include "BawkBusterFunctions.hpp"
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 /****************************************************************************************
 Main Menu Functions
 ****************************************************************************************/
-
 /*
-mainMenu()
-Main function that manages the user's access to submenus.
-Allows user to select a submenu choice.
+takes a vector of viedos by reference, fills with movie info from file
 */
 
-void mainMenu()
+bool importMovieDataFromFile(vector<Video> &videoList)
 {
-	int choiceMain;						//Variable to hold user's menu choice
-	displayMainMenu();					//Display the menu
-	cin >> choiceMain;					//Get user's choice
-	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
-	mainMenuSwitch(choiceMain);			//Use switch to navigate to desired submenu
+    string title;
+    string genre;
+    string director;
+    string actor;
+    
+    std::ifstream inputFile("movie-dataset.csv");
+    if (!inputFile)  // ifstream object equals 0 if open fails
+    {
+        cout << "Could not access file" << endl;
+        return false;
+    }
+
+    while(inputFile) //read through to the end of the file
+    {
+        getline(inputFile,title,',');  //title = title from file
+        getline(inputFile,genre,',');  //genre = genre from file
+        getline(inputFile,director,',');  //director = director from file
+        getline(inputFile,actor,'\n');  //director = director from file
+
+        videoList.push_back(Video(title, genre, director, actor)); 
+    }
+
+    inputFile.close();
+    return true;
 }
 
 /*
@@ -61,36 +76,12 @@ void validateMainMenuChoice(int &choiceMain)
 {
 	//While the user input is not of the "int" datatype,
 	//or the user input is larger than 6 or smaller than 1
-	while (!(cin >> choiceMain) || choiceMain > 6 || choiceMain < 1)
+	while (!cin || choiceMain > 6 || choiceMain < 1)
 	{
 		cin.clear();	//Clear bad input flag
 		cin.ignore(10000, '\n');	//Discard input
 		cout << "Please enter a number between 1 and 6" << endl;
 		cin >> choiceMain;
-	}
-}
-
-/*
-void mainMenuSwitch(int choiceMain)
-Uses user input to direct to desired sub menu.
-*/
-
-void mainMenuSwitch(int choiceMain)
-{
-	switch (choiceMain) 
-	{
-		case 1: titleSearchMain();
-			break;
-		case 2: genreSearchMain();
-			break;
-		case 3: directorSearchMain();
-			break;
-		case 4: moviesInCartMain();
-			break;
-		case 5: checkPriceMain();
-			break;
-		case 6: checkOutMain();
-			break;
 	}
 }
 
@@ -106,40 +97,59 @@ Allows user to add movies found in search to cart.
 Returns user to main menu when user is done searching by title.
 */
 
-void titleSearchMain()
+void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so it's available to search
 {
+	vector<Video> results;		//Initialize an empty vector of movie results
 	string title = "";			//Initalize new string to hold user input
-	displayTitleSearchMenu();	//Display title search menu
+
+	cin.clear();				//Clear bad input flag
+	cin.ignore(10000, '\n');	//Discard input
+	system("CLS");				//Clear screen before displaying menu
+	cout << "Search Movies by: Title\n" << endl;
+	cout << "Enter the title of the movie you are searching for,\n" 
+		<< "or enter '0' to return to Main Menu." << endl;
+
 	getline(cin, title);		//Get user input, store in 'title'
 	while (title != "0")		//As long as the user doesn't enter '0',
 								//(s)he can search as many times as desired.
 	{							
 		//search for movie titles, return results (if any)
-
-		addToCart();			//User decides if (s)he wants to add the movie to the cart,
-								//and continues searching.
-
+		titleSearchVector(videoList, results, title);
+		if (results.empty())  //if results is empty, we didn't find it
+		{
+			system("CLS");
+			cout << "Movie not found\n" << endl;
+		}
+		else
+		{
+			system("CLS");
+			cout << "Movie found!!\n";  //result now holds the address of the movie!!
+			addToCart();				//User decides if (s)he wants to add the movie to the cart,
+										//and continues searching.
+		}
+		results.clear(); //delete everything from the vector to prepare for the next search
 		cout << "Please enter another movie title,\n"
 			 << "or enter '0' to return to Main Menu." << endl;
 		getline(cin, title);
 	}
-	//TODO: Search dataset using the user's input
 	//TODO: Function to add user selections to cart
-	mainMenu();					//Returns to main menu after user exits while loop
 }
 
-/*
-displayTitleSearchMenu()
-Displays the search menu for searching movies by title.
-*/
-
-void displayTitleSearchMenu()
+void titleSearchVector(const vector<Video>& videos, vector<Video>& results, string titleIn)  
+//takes a const vector of movies to search, a vector of videos to add results to, and a search term.
 {
-	system("CLS");	//Clear screen before displaying menu
-	cout << "Search Movies by: Title\n" << endl;
-	cout << "Enter the title of the movie you are searching for,\n" 
-		<< "or enter '0' to return to Main Menu." << endl;
+    Video temp;  //creates a temporary video to hold values as we process vector
+    int index = 0;
+    int size = videos.size();
+    while(index < size)
+    {
+       	temp = videos[index];  //set temp equal to the video at [index]
+       	if(temp.getTitle() == titleIn)
+    		results.push_back(videos[index]);  //if video is found, add it to results
+       	index++;
+    }
 }
+
 
 /*
 addToCart()
