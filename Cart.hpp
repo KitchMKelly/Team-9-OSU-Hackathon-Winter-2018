@@ -20,13 +20,14 @@ class Cart
 		std::vector<Video> vidVector;	// a vector of video objects
 	public:
 		Cart();
-		Cart(int, double, std::vector<Video>;
 		void setNumCart(std::vector<Video> vidInput);	// takes the video vector class member and counts number of items in cart
 		int getNumCart();				// returns number of items in cart
 		void setTPrice(std::vector<Video> vidInput);	// takes the video vector class member and calculates the total price
 		double getTPrice();				// returns the total price of of the cart
 		void addVidToCart(Video);			// adds a video object to the cart
-		std::vector<Video> getTitles();			// returns a vector of videos objects in the cart
+		std::vector<Video> getVideos();			// returns a vector of videos objects in the cart
+		void emptyCart();				// removes all the items in the cart
+		void unAddToCart();				// removes the last added video to the cart
 		void printCart();				// prints the items in the cart;
 };
 

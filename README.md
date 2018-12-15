@@ -1,4 +1,4 @@
-# Team Bawkbusters
+# Team BawkBusters
 
 ### Project Title
 
