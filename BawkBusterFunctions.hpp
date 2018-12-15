@@ -43,6 +43,17 @@ that functions with Windows and Linux operating systems.
 void clear_screen();
 
 /****************************************************************************************
+System Pause Function
+****************************************************************************************/
+ 
+/*
+systemPause()
+Function that pauses the program until user input is received
+*/
+
+void systemPause();
+
+/****************************************************************************************
 Main Menu Functions
 ****************************************************************************************/
 
