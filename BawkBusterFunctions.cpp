@@ -11,7 +11,7 @@ using std::string;
 using std::vector;
 
 /****************************************************************************************
-Main Menu Functions
+Video Vector Functions
 ****************************************************************************************/
 /*
 takes a vector of viedos by reference, fills with movie info from file
@@ -43,6 +43,25 @@ bool importMovieDataFromFile(vector<Video> &videoList)
 
     inputFile.close();
     return true;
+}
+
+/****************************************************************************************
+Main Menu Functions
+****************************************************************************************/
+
+/*
+mainMenu()
+Main function that manages the user's access to submenus.
+Allows user to select a submenu choice.
+*/
+
+void mainMenu()
+{
+	int choiceMain;						//Variable to hold user's menu choice
+	displayMainMenu();					//Display the menu
+	cin >> choiceMain;					//Get user's choice
+	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
+	mainMenuSwitch(choiceMain);			//Use switch to navigate to desired submenu
 }
 
 /*
@@ -82,6 +101,30 @@ void validateMainMenuChoice(int &choiceMain)
 		cin.ignore(10000, '\n');	//Discard input
 		cout << "Please enter a number between 1 and 6" << endl;
 		cin >> choiceMain;
+	}
+}
+
+/*
+void mainMenuSwitch(int choiceMain)
+Uses user input to direct to desired sub menu.
+*/
+
+void mainMenuSwitch(int choiceMain)
+{
+	switch (choiceMain) 
+	{
+		case 1: titleSearchMain();
+			break;
+		case 2: genreSearchMain();
+			break;
+		case 3: directorSearchMain();
+			break;
+		case 4: moviesInCartMain();
+			break;
+		case 5: checkPriceMain();
+			break;
+		case 6: checkOutMain();
+			break;
 	}
 }
 
