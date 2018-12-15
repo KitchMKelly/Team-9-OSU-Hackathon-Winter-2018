@@ -66,6 +66,22 @@ void clear_screen()
 }
 
 /****************************************************************************************
+System Pause Function
+****************************************************************************************/
+ 
+/*
+systemPause()
+Function that pauses the program until user input is received
+*/
+
+void systemPause()
+{
+	std::cin.ignore(1024, '\n');	// Discart old input
+	std::cout << "Press enter to continue...";
+	std::cin.get();			// Proceed after new input from user
+}
+
+/****************************************************************************************
 Main Menu Functions
 ****************************************************************************************/
 
@@ -543,7 +559,7 @@ void displayMoviesInCart()
 	clear_screen();	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
 	//TODO: Show what's in the user's cart
-	//system("pause");	//Wait for user to press 'enter'
+	systemPause();	//Wait for user input
 }
 
 /****************************************************************************************
@@ -578,8 +594,8 @@ void displayPrice()
 	cout << "Current price of the movies in your cart:\n" << 
 		//whatever variable holds total price <<
 		endl;
-	//system("pause");	//Waits for user to press 'enter'
-						//before returning to main menu
+	systemPause();	//Waits for user input
+			//before returning to main menu
 }
 
 /****************************************************************************************
@@ -611,6 +627,6 @@ void displayCheckOut()
 		//whatever variable is used for total price <<
 		endl;
 	cout << "Enjoy your movies!" << endl;
-	//system("pause");	//Waits for user to press "enter"
-						//before exiting program.
+	systemPause();	//Waits for user input
+			//before exiting program.
 }
