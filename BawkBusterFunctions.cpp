@@ -4,7 +4,6 @@ at the BeaverHacks Winter 2018 Hackathon.
 */
 
 #include "BawkBusterFunctions.hpp"
-#include <cstdlib>
 
 using std::cin;
 using std::cout;
