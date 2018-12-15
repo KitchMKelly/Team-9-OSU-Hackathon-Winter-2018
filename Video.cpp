@@ -5,29 +5,30 @@
 ** and a method to print video information are included
 ******************************************************************************/
 #include <iostream>
+#include <vector>
 #include "Video.hpp"
 
 Video::Video()  //default constructor with junk values
 {
     title = "AAA";
-    genre = OTHER;
+    genre = "OTHER";
     director = "AAA";
     actor = "AAA";
-    price = -100;
+    //price = -100;
 }
-Video::Video(std::string titleIn, Genre genreIn, std::string directorIn, std::string actorIn, double priceIn)
+Video::Video(std::string titleIn, std::string genreIn, std::string directorIn, std::string actorIn)
 {
     title = titleIn;
     genre = genreIn;
     director = directorIn;
     actor = actorIn;
-    price = priceIn;
+    //price = PRICE;
 }
 std::string Video::getTitle()
 {
     return title;
 }
-Genre Video::getGenre()
+std::string Video::getGenre()
 {
     return genre;
 }
@@ -39,15 +40,39 @@ std::string Video::getActor()
 {
     return actor;
 }
-double Video::getPrice()
+/*double Video::getPrice()
 {
-    return price;
-}
+    return PRICE;
+}*/
 void Video::printInfo(Video videoIn)
 {
     std::cout << "Title: " << videoIn.getTitle() << std::endl;
     std::cout << "Genre: " << videoIn.getGenre() << std::endl;
     std::cout << "Director: " << videoIn.getDirector() << std::endl;
     std::cout << "Actor: " << videoIn.getActor() << std::endl;
-    std::cout << "Price: " << videoIn.getPrice() << std::endl;
+    //std::cout << "Price: " << videoIn.getPrice() << std::endl;
 }
+
+void Video::addToVector(Video videoIn)
+{
+    //vector<Video> videos;
+    videos.push_back(videoIn);
+}
+
+void Video::searchTitle(const videos[], string titleIn)
+{
+    int index = 0;
+    size = videos.size();
+    bool found = false;
+    while(index < size && !found)
+    {
+       if(videos[index].getTitle() == titleIn)
+       {
+          found = true;
+          result = videos[index]; 
+       }
+       index++;
+    }
+}
+
+    
