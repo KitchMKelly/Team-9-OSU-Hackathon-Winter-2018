@@ -27,7 +27,7 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu();
+void mainMenu(std::vector<Video> &videoList);
 
 /*
 displayMainMenu()
@@ -51,7 +51,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain);
+void mainMenuSwitch(int choiceMain, std::vector<Video> &videoList);
 
 /****************************************************************************************
 Title Search Submenu Functions

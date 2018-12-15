@@ -76,13 +76,13 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu()
+void mainMenu(vector<Video> &videoList)
 {
 	int choiceMain;						//Variable to hold user's menu choice
 	displayMainMenu();					//Display the menu
 	cin >> choiceMain;					//Get user's choice
 	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
-	mainMenuSwitch(choiceMain);			//Use switch to navigate to desired submenu
+	mainMenuSwitch(choiceMain, videoList);			//Use switch to navigate to desired submenu
 }
 
 /*
@@ -130,15 +130,15 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain)
+void mainMenuSwitch(int choiceMain, vector<Video> &videoList)
 {
 	switch (choiceMain) 
 	{
-		case 1: titleSearchMain();
+		case 1: titleSearchMain(videoList);
 			break;
-		case 2: genreSearchMain();
+		case 2: genreSearchMain(videoList);
 			break;
-		case 3: directorSearchMain();
+		case 3: directorSearchMain(videoList);
 			break;
 		case 4: moviesInCartMain();
 			break;
