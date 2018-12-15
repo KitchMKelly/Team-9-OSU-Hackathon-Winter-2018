@@ -8,13 +8,14 @@ at the BeaverHacks Winter 2018 Hackathon.
 #include <ctype.h>
 #include <vector>
 #include <fstream>
+#include <cstdlib>
 #include "Video.hpp"
 #include "Cart.hpp"
 
-
 /****************************************************************************************
-Main Menu Functions
+Video Vector Functions
 ****************************************************************************************/
+
 /*
 takes a vector of viedos by reference, fills with movie info from file
 */
@@ -27,7 +28,32 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
+<<<<<<< HEAD
 void mainMenu(std::vector<Video> &videoList);
+=======
+/****************************************************************************************
+Clear Screen Function For Linux and Windows OS's
+****************************************************************************************/
+/*
+clear_screen()
+Function to remove all text from the console screen
+that functions with Windows and Linux operating systems.
+*/
+
+void clear_screen();
+
+/****************************************************************************************
+Main Menu Functions
+****************************************************************************************/
+
+/*
+mainMenu()
+Main function that manages the user's access to submenus.
+Allows user to select a submenu choice.
+*/
+
+void mainMenu();
+>>>>>>> 181aa59ef2cb18438b716074538fb96da6ed3301
 
 /*
 displayMainMenu()
@@ -66,6 +92,11 @@ Returns user to main menu when user is done searching by title.
 */
 
 void titleSearchMain(std::vector<Video>& videoList);
+
+/*
+titleSearchVector()
+takes a const vector of movies to search, a vector of videos to add results to, and a search term.
+*/
 
 void titleSearchVector(const std::vector<Video>& videos, std::vector<Video>& results, std::string titleIn);
 
@@ -115,6 +146,7 @@ void validateGenreMenuChoice(int &choiceGenre);
 search function for genre, takes in vector of movies to search,
 a vector of results to fill, and a genre string to search for
 */
+
 void genreSearchVector( const std::vector<Video>& videos, 
                         std::vector<Video>& results, 
                         std::string genreIn);
@@ -142,6 +174,11 @@ The user arrives at this menu from the main menu if
 */
 
 void displayDirectorSearchMenu();
+
+/*
+directorSearchVector()
+takes a const vector of movies to search, a vector of videos to add results to, and a search term.
+*/
 
 void directorSearchVector(  const std::vector<Video>& videos, 
                             std::vector<Video>& results, 
