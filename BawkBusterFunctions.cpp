@@ -38,7 +38,7 @@ bool importMovieDataFromFile(vector<Video> &videoList)
         getline(inputFile,title,',');  //title = title from file
         getline(inputFile,genre,',');  //genre = genre from file
         getline(inputFile,director,',');  //director = director from file
-        getline(inputFile,actor,'\n');  //director = director from file
+        getline(inputFile,actor,'\n');  //actor = actor from file
 
         videoList.push_back(Video(title, genre, director, actor)); 
     }
