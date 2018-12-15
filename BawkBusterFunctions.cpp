@@ -3,13 +3,23 @@ This file contains the functions used in the BawkBuster submission
 at the BeaverHacks Winter 2018 Hackathon.
 */
 #include <iostream>
+#include <string>
+#include <stdio.h>
+#include <ctype.h>
 using std::cin;
 using std::cout;
 using std::endl;
+using std::string;
 
 /****************************************************************************************
-									Main Menu Functions
+Main Menu Functions
 ****************************************************************************************/
+
+/*
+mainMenu()
+Main function that manages the user's access to submenus.
+Allows user to select a submenu choice.
+*/
 
 void mainMenu()
 {
@@ -85,7 +95,7 @@ void mainMenuSwitch(int choiceMain)
 }
 
 /****************************************************************************************
-							Title Search Submenu Functions
+Title Search Submenu Functions
 ****************************************************************************************/
 
 /*
@@ -98,11 +108,24 @@ Returns user to main menu when user is done searching by title.
 
 void titleSearchMain()
 {
-	displayTitleSearchMenu();
-	//TODO: Accept user input and search dataset using the user's input
+	string title = "";			//Initalize new string to hold user input
+	displayTitleSearchMenu();	//Display title search menu
+	getline(cin, title);		//Get user input, store in 'title'
+	while (title != "0")		//As long as the user doesn't enter '0',
+								//(s)he can search as many times as desired.
+	{							
+		//search for movie titles, return results (if any)
+
+		addToCart();			//User decides if (s)he wants to add the movie to the cart,
+								//and continues searching.
+
+		cout << "Please enter another movie title,\n"
+			 << "or enter '0' to return to Main Menu." << endl;
+		getline(cin, title);
+	}
+	//TODO: Search dataset using the user's input
 	//TODO: Function to add user selections to cart
-	//TODO: Function to allow multiple searches
-	//TODO: Function to return to main menu
+	mainMenu();					//Returns to main menu after user exits while loop
 }
 
 /*
@@ -113,13 +136,45 @@ Displays the search menu for searching movies by title.
 void displayTitleSearchMenu()
 {
 	system("CLS");	//Clear screen before displaying menu
-	cout << "Search Movies by: Title" << endl;
+	cout << "Search Movies by: Title\n" << endl;
 	cout << "Enter the title of the movie you are searching for,\n" 
-		<< "or type 'exit' to return to the main menu." << endl;
+		<< "or enter '0' to return to Main Menu." << endl;
+}
+
+/*
+addToCart()
+Adds the desired movie to the cart
+and allows user to make another search.
+*/
+
+void addToCart()
+{
+	char addDecision;		//variable to hold user choice
+	cout << "Would you like to add this movie to your cart? (Y/N)" << endl;
+	cin >> addDecision;
+	
+	//Verify user input
+	while (!(cin >> addDecision) || (toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+	{
+		cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
+		cout << "or enter 'N' to start a new search." << endl;
+		cin >> addDecision;
+	}
+
+	//Action based on user input
+	if (toupper(addDecision) == 'Y')
+	{
+		//add movie to cart
+		//display confirmation message ("movieName" was added to your cart!)
+	}
+	else if (toupper(addDecision) == 'N')
+	{
+		//display confirmation message ("movieName" was not added to your cart!)
+	}
 }
 
 /****************************************************************************************
-							Genre Search Submenu Functions
+Genre Search Submenu Functions
 ****************************************************************************************/
 
 /*
@@ -180,7 +235,7 @@ void validateGenreMenuChoice(int &choiceGenre)
 }
 
 /****************************************************************************************
-							Director Search Submenu Functions
+Director Search Submenu Functions
 ****************************************************************************************/
 
 /*
@@ -217,7 +272,7 @@ void displayDirectorSearchMenu()
 }
 
 /****************************************************************************************
-							Movies In Cart Submenu Functions
+Movies In Cart Submenu Functions
 ****************************************************************************************/
 
 /*
@@ -255,7 +310,7 @@ void displayMoviesInCart()
 }
 
 /****************************************************************************************
-							  Check Price Submenu Functions
+Check Price Submenu Functions
 ****************************************************************************************/
 
 /*
@@ -291,7 +346,7 @@ void displayPrice()
 }
 
 /****************************************************************************************
-					Checkout Submenu Functions/End of Program Functions
+Checkout Submenu Functions/End of Program Functions
 ****************************************************************************************/
 
 /*
