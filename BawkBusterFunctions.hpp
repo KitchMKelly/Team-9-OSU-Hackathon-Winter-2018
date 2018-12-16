@@ -23,14 +23,6 @@ takes a vector of viedos by reference, fills with movie info from file
 
 bool importMovieDataFromFile(std::vector<Video> &videoList);
 
-/*
-mainMenu()
-Main function that manages the user's access to submenus.
-Allows user to select a submenu choice.
-*/
-
-void mainMenu(std::vector<Video> &videoList);
-
 /****************************************************************************************
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
@@ -38,9 +30,6 @@ Clear Screen Function For Linux and Windows OS's
 clearScreen()
 Function to remove all text from the console screen
 that functions with Windows and Linux operating systems.
-DOES NOT FUNCTION WITH Repl.it
-PLEASE DO NOT USE!
-COMMENT OUT WHERE SEEN!
 */
 
 void clearScreen();
@@ -73,6 +62,15 @@ Main Menu Functions
 ****************************************************************************************/
 
 /*
+mainMenu()
+Main function that manages the user's access to submenus.
+Allows user to select a submenu choice.
+Exits if choiceMain == 0
+*/
+
+void mainMenu(Cart& newCart, std::vector<Video> &videoList);
+
+/*
 displayMainMenu()
 Displays the main menu choices for the user to choose from
 */
@@ -94,7 +92,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain,Cart& newCart, std::vector<Video> &videoList);
+void mainMenuSwitch(int &choiceMain, Cart& newCart, std::vector<Video> &videoList);
 
 /****************************************************************************************
 Title Search Submenu Functions
@@ -261,7 +259,7 @@ Main function that executes when user selects option 6 from the main menu.
 Allows user to check out/exit program.
 Allows option to return to main menu if desired.
 */
-void checkOutMain(Cart newCart);
+void checkOutMain(Cart newCart, int &choceMain);
 
 /*
 void displayCheckOut()
