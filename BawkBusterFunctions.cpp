@@ -50,14 +50,14 @@ bool importMovieDataFromFile(vector<Video> &videoList)
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
 /*
-clear_screen()
+clearScreen()
 Function to remove all text from the console screen
 that functions with Windows and Linux operating systems.
 */
 
-void clear_screen()
+void clearScreen()
 {
-	#ifdef WINDOWS
+	#ifdef _WIN32
 		std::system("cls");
 	#else
 		//Assume POSIX
@@ -76,6 +76,7 @@ Function that pauses the program until user input is received
 
 void systemPause()
 {
+	cin.clear();
 	std::cin.ignore(1024, '\n');	// Discart old input
 	std::cout << "Press enter to continue...";
 	std::cin.get();			// Proceed after new input from user
@@ -99,10 +100,11 @@ void addToCart(Cart &newCart, std::vector<Video> &results)
 		Video vid = results[index];
 		cout << index + 1 << ". " << vid.getTitle() << endl;
 	}*/
-	cout << "There are " << results.size() << " search results" << endl;
+	
 	if(results.size() > 1)
 	{
-		cout << "Would you like to add one of these movies  to your cart? (Y/N)" << endl;
+		cout << endl << "There are " << results.size() << " search results" << endl;
+		cout << "Would you like to add one of these movies to your cart? (Y/N)" << endl;
 		cin >> addDecision;
 		//Verify user input
 		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
@@ -118,7 +120,7 @@ void addToCart(Cart &newCart, std::vector<Video> &results)
 		{
 			int movieNumber = 0;
 			cout << "Please enter the movie number you would like to add." << endl;
-			cout << "For example, if you wish to add result 1. Avatar to the cart, type 1" << endl;
+			cout << "For example, if you wish to add result \"1. Avatar\", please type 1:" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 			cin >> movieNumber;
@@ -132,21 +134,23 @@ void addToCart(Cart &newCart, std::vector<Video> &results)
 			else
 			{
 				Video vid = results[(movieNumber - 1)];
-				cout << "video title is " << vid.getTitle() << endl;
+				//cout << "video title is " << vid.getTitle() << endl;
 				newCart.addVidToCart(vid);
-				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
-				systemPause();
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cout << endl << vid.getTitle() << " was added to your cart!" << endl;
+				//systemPause();
 			}
 		}	
 		if(toupper(addDecision) == 'N')
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "No movies added to your cart, returning to main menu" << endl;			
+			cout << "No movies added to your cart" << endl;			
 		}
 				
 	}
-	else
+	else if (results.size() == 1)
 	{
 		cout << "Would you like to add this movie to your cart? (Y/N)" <<endl;
 		cin >> addDecision;
@@ -168,14 +172,15 @@ void addToCart(Cart &newCart, std::vector<Video> &results)
 			cin.ignore(1000,'\n');
 			Video vid = results[0];
 			newCart.addVidToCart(vid);
-			cout << vid.getTitle() << " was added to your cart! Returning to search by Title menu" << endl;
+			clearScreen();
+			cout << vid.getTitle() << " was added to your cart!" << endl <<endl;
 			//TODO send back to main menu?
 		}
 		else if (toupper(addDecision) == 'N')
 		{
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "No movies added to your cart, returning to search by Title menu" << endl;			
+			cout << "No movies added to your cart" << endl;			
 		}
 	}
 }
@@ -190,13 +195,13 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu(Cart newCart, vector<Video> &videoList)
+void mainMenu(Cart& newCart, vector<Video> &videoList)
 {
 	int choiceMain;						//Variable to hold user's menu choice
 	displayMainMenu();					//Display the menu
 	cin >> choiceMain;					//Get user's choice
 	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
-	mainMenuSwitch(choiceMain, newCart, videoList);			//Use switch to navigate to desired submenu
+	//mainMenuSwitch(choiceMain, newCart, videoList);			//Use switch to navigate to desired submenu
 }
 
 /*
@@ -206,7 +211,7 @@ Displays the main menu choices for the user to choose from
 
 void displayMainMenu()
 {
-	clear_screen();	//Clear screen before displaying menu
+	clearScreen();	//Clear screen before displaying menu
 	cout << "Welcome to BawkBuster!\n" << endl;
 	cout << "Select on of the following options:\n" << endl;
 	cout << "1: Search movies by Title" << endl;
@@ -244,7 +249,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain, Cart newCart, vector<Video> &videoList)
+void mainMenuSwitch(int choiceMain, Cart& newCart, vector<Video> &videoList)
 {
 	switch (choiceMain) 
 	{
@@ -258,7 +263,7 @@ void mainMenuSwitch(int choiceMain, Cart newCart, vector<Video> &videoList)
 			break;
 		case 5: checkPriceMain();
 			break;
-		case 6: checkOutMain();
+		case 6: checkOutMain(newCart);
 			break;
 	}
 }
@@ -275,14 +280,14 @@ Allows user to add movies found in search to cart.
 Returns user to main menu when user is done searching by title.
 */
 
-void titleSearchMain(Cart newCart, vector<Video>& videoList)  //Needed to pass the vector so it's available to search
+void titleSearchMain(Cart& newCart, vector<Video>& videoList)  //Needed to pass the vector so it's available to search
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
 	string title = "";			//Initalize new string to hold user input
 
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	clear_screen();				//Clear screen before displaying menu
+	clearScreen();				//Clear screen before displaying menu
 	cout << "Search Movies by: Title\n" << endl;
 	cout << "Enter the title of the movie you are searching for,\n" 
 		<< "or enter '0' to return to Main Menu." << endl;
@@ -295,12 +300,12 @@ void titleSearchMain(Cart newCart, vector<Video>& videoList)  //Needed to pass t
 		titleSearchVector(videoList, results, title);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Movie not found\n" << endl;
 		}
 		else
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Movie found!!\n";  //results now holds the movie!!
 			addToCart(newCart, results);				//User decides if (s)he wants to add the movie to the cart,
 										//and continues searching.
@@ -340,18 +345,22 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain(Cart newCart, vector<Video>& videoList)
+void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
-	int genreChoice = 0;		//Initalize new string to hold user input
+	int genreChoice = -1;		//Initalize new string to hold user input
 	string genre = "";
 
-	displayGenreSearchMenu();
-	cin >> genreChoice;			//Get user input, store in 'genreChoice'
-	validateGenreMenuChoice(genreChoice);
+
 	
-	switch(genreChoice) 
-	{
+	do{	
+
+		displayGenreSearchMenu();
+		cin >> genreChoice;			//Get user input, store in 'genreChoice'
+		validateGenreMenuChoice(genreChoice);
+	
+		switch(genreChoice) 
+		{
 		case 1: genre = "Action";
 			break;
 		case 2: genre = "Adventure"; 
@@ -362,25 +371,23 @@ void genreSearchMain(Cart newCart, vector<Video>& videoList)
 			break;
 		case 5: genre = "Horror"; 
 			break;
-		case 6: genre = "Animated"; 
+		case 6: genre = "Animation"; 
 			break;
 		case 7: genre = "Other"; //this one is going to be more complicated
 			break;				 //since we can't do a simple text match		
-	}		
+		}		
 
-	while (genreChoice != 0)	//As long as the user doesn't enter '0',
-								//(s)he can search as many times as desired.
-	{							
+						
 		//search for movie titles, return results (if any)
 		genreSearchVector(videoList, results, genre);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Nothing found!\n" << endl;
 		}
 		else
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Movies found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
@@ -388,14 +395,14 @@ void genreSearchMain(Cart newCart, vector<Video>& videoList)
 			}
 			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
-			clear_screen();
+			//clearScreen();
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
-		cout << "Please enter another movie title,\n"
-			 << "or enter '0' to return to Main Menu." << endl;
-		systemPause();
+		//cin.clear();
+		cin.ignore(1000, '\n');
 		//getline(cin, title);
-	}	
+	} while (genreChoice != 0);	//As long as the user doesn't enter '0',
+								//(s)he can search as many times as desired.	
 	//TODO: Function to add individual movies from the searched genre to the cart
 	//TODO: Function to allow multiple searches of different genres
 	//TODO: Function to return to main menu
@@ -412,7 +419,7 @@ void displayGenreSearchMenu()
 {
 	cin.clear();				//Clear bad input flag
 	cin.ignore(10000, '\n');	//Discard input
-	clear_screen();	//Clear screen before displaying menu
+	clearScreen();	//Clear screen before displaying menu
 	cout << "Search Movies by: Genre\n" << endl;
 	cout << "What genre of movie are you interested in watching?\n" << endl;
 	cout << "1: Action" << endl;
@@ -420,7 +427,7 @@ void displayGenreSearchMenu()
 	cout << "3: Comedy" << endl;
 	cout << "4: Romance" << endl;
 	cout << "5: Horror" << endl;
-	cout << "6: Animated" << endl;
+	cout << "6: Animation" << endl;
 	cout << "7: Other" << endl;
 	cout << "0: Return to Main Menu\n" << endl;  //changed 8 to 0 for consistency with title search
 	cout << "Please enter a choice between 0 and 7" << endl;
@@ -474,7 +481,7 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain(Cart newCart, vector<Video>& videoList)
+void directorSearchMain(Cart& newCart, vector<Video>& videoList)
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
 	string director = "";			//Initalize new string to hold user input
@@ -491,16 +498,16 @@ void directorSearchMain(Cart newCart, vector<Video>& videoList)
 		directorSearchVector(videoList, results, director);
 		if (results.empty())  //if results is empty, we didn't find it
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Director not found\n" << endl;
 		}
 		else
 		{
-			clear_screen();
+			clearScreen();
 			cout << "Movies by " << director <<" found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
-				cout << i << ". " << results[i].getTitle() << endl;
+				cout << i+1 << ". " << results[i].getTitle() << endl;
 			}
 			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
@@ -521,10 +528,10 @@ The user arrives at this menu from the main menu if
 
 void displayDirectorSearchMenu()
 {
-	clear_screen();	//Clear screen before displaying menu
+	clearScreen();	//Clear screen before displaying menu
 	cout << "Search movies by: Director\n" << endl;
-	cout << "Enter the name of the director,\n"
-		<< "or type 'exit' to return to the main menu." << endl;
+	cout << "Enter the name of a director,\n"
+		<< "or type '0' to return to the main menu." << endl;
 }
 
 void directorSearchVector(const vector<Video>& videos, vector<Video>& results, string directorIn)  
@@ -556,10 +563,13 @@ Returns user to main menu when finished.
 Possibly allows user to check out from here?
 */
 
-void moviesInCartMain(Cart newCart)
+void moviesInCartMain(Cart& newCart)
 {
-	clear_screen();
+	clearScreen();
 	displayMoviesInCart(newCart);
+	if(newCart.getNumCart() == 0)  //Andrew: if cart is empty, return to the main menu
+		return;
+	cout << endl;
 	cout << "You have " << newCart.getNumCart() << " movies in your Cart.\n";
 	cout << "The total price is $" << newCart.getTPrice() << "\n\n";
 	cout << "Would you like to:\n";
@@ -567,15 +577,41 @@ void moviesInCartMain(Cart newCart)
 	cout << "	2. Clear Cart?\n";
 	cout << "	3. Remove Last Item Added?\n";
 	cout << "	4. Return to Main Menu?\n";
-	cout << "	5. Exit the Program?\n\n";
-	cout << "Plase enter your choice (1 - 5)\n";
-	//Get user's choice
+	//cout << "	5. Exit the Program?\n\n";  Andrew: User should only be able to exit from the main menu
+	cout << "Please enter your choice (1 - 4)\n";
+
 	int choice;
 	cin >> choice;
-	//Validate user's choice
 	validateCartChoice(choice);
 	//Perform the desired action
-	moviesInCartSwitch(choice, newCart);
+
+	switch (choice)
+	{
+		case 1:
+		{	checkOutMain(newCart);
+			break;
+		}
+		case 2:
+		{
+			newCart.emptyCart();
+			clearScreen();
+			cout << "Your cart has been cleared!\n";
+			systemPause();
+			break;
+		}
+		case 3:
+		{
+			newCart.unAddToCart();  //removes last video from real cart
+			systemPause();
+			break;
+		}
+		case 4:
+			break; //Andrew: this will automatically return to main menu, no need to add anything here
+
+		//Andrew: User should only be able to exit the program from the main menu so I deleted the option
+	}
+
+
 }
 
 /*
@@ -585,10 +621,20 @@ The user arrives at this menu from the main menu if
 (s)he selects option 4.
 */
 
-void displayMoviesInCart(Cart current)
+void displayMoviesInCart(Cart& current)
 {
-	clear_screen();	//Clear screen before displaying menu
-	cout << "Here's what's in your cart:" << endl;
+	vector<Video> temp = current.getVideos();  //creates a temporary vector and sets it equal to the cart
+	clearScreen();	//Clear screen before displaying menu
+	if(temp.empty())
+		cout << "Your cart is empty!" << endl;
+	else
+	{
+		cout << "Here's what's in your cart:" << endl;
+		for (int i = 0; i < current.getNumCart(); i++)  //iterates through cart, displaying the title of each movie
+		{
+			cout << i+1 << ". " << temp[i].getTitle() << endl;
+		}
+	}
 	//TODO: Show what's in the user's cart
 	systemPause();	//Wait for user input
 }
@@ -601,48 +647,15 @@ Check Price Submenu Functions
 
 void validateCartChoice(int choice)
 {
-	while (!cin || choice > 5 || choice < 1)
+	while (!cin || choice > 4 || choice < 1)
 	{
 		cin.clear(); //clear bad input flag
 		cin.ignore(10000, '\n'); //Discard input
-		cout << "PLase enter a number between 1 and 5" << endl;
+		cout << "Please enter a number between 1 and 5" << endl;
 		cin >> choice;
 	}
 }
 
-/* Uses user input to perform a desired function */
-
-void moviesInCartSwitch(int choiceMain, Cart cartIn)
-{
-	switch (choiceMain)
-	{
-		case 1:
-		{	checkOutMain();
-			break;
-		}
-		case 2:
-		{
-			cartIn.emptyCart();
-			cout << "Your cart has been cleared!\n";
-			break;
-		}
-		case 3:
-		{
-			cartIn.unAddToCart();
-			cout << "The Last Item You've Added Has Been Removed!";
-			break;
-		}
-		case 4:
-		{	// TODO:FUNCTION TO RETURN TO THE MAIN MENU
-			break;
-		}
-		case 5:
-		{	// TODO:FUNCTION TO EXIT THE PROGRAM
-			break;
-		}
-	}
-			
-}
 
 
 /*
@@ -687,9 +700,9 @@ Main function that executes when user selects option 6 from the main menu.
 Allows user to check out/exit program.
 Allows option to return to main menu if desired.
 */
-void checkOutMain()
+void checkOutMain(Cart newCart)
 {
-	displayCheckOut();
+	displayCheckOut(newCart);
 }
 
 /*
@@ -699,12 +712,10 @@ The user arrives at this menu from the main menu if
 (s)he selects option 6.
 */
 
-void displayCheckOut()
+void displayCheckOut(Cart newCart)
 {
 	cout << "Thank you for choosing BawkBuster!" << endl;
-	cout << "Your total price is: " <<
-		//whatever variable is used for total price <<
-		endl;
+	cout << "Your total price is: " << newCart.getTPrice() << endl;
 	cout << "Enjoy your movies!" << endl;
 	systemPause();	//Waits for user input
 			//before exiting program.

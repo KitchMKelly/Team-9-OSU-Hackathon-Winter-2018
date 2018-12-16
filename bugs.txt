@@ -1,0 +1,29 @@
+Initial bugs (X means it has been fixed)
+X-clear doesn't work
+X-add to cart is giving weird messages from title search
+X-genre asks you to input another title (not genre), it should show the menu and ask for another number
+-genre search, if you say Y and add one to cart, it makes you press enter twice to return to menu
+-genre asks you to press "Enter to continue" to return to the main menu for some reason, then doesn't take you back to the main menu
+X-director search add to cart starts at 0, but should start at 1
+X-director search add is off by 1 (I wanted to add 7 but it added 6)
+X-after adding to cart, it says returning to main menu for some reason
+X-cart straight up does not work, it doesn't store anything (need to create cart in main and pass to functions obviously)
+-check out from cart submenu should end the program
+
+
+
+Fixes
+-Screen clear function now works on Windows
+-cart now actually stores stuff (pass by reference now instead of value)
+-added function to display items in cart
+-director search now displays list starting at 1 (not 0) and the correct movie is added to the cart
+-added check to unAddToCart to make sure cart isn't already empty
+-completed unAddToCart, and clearCArt
+
+
+
+Remaining Bugs
+-genre search, if you say Y and add one to cart, it makes you press enter twice to return to menu
+-genre search, if you search genres, select a genre, don't add a movie to the cart, then choose to go back
+to the main menu, it gives the genre search menu again
+-check out says it will end the program, but then goes back to the main menu
