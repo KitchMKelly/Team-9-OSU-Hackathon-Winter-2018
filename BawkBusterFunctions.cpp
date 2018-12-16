@@ -82,6 +82,106 @@ void systemPause()
 }
 
 /****************************************************************************************
+Add to Cart Function
+****************************************************************************************/
+
+/*
+addToCart()
+Adds the desired movie to the cart
+and allows user to make another search.
+*/
+
+void addToCart(std::vector<Video> &results)
+{
+	char addDecision;		//variable to hold user choice
+	Cart newCart;
+	for(int index = 0; index < (results.size()); index++)
+	{
+		Video vid = results[index];
+		cout << index + 1 << ". " << vid.getTitle() << endl;
+	}
+	cout << "There are " << results.size() << " search results" << endl;
+	if(results.size() > 1)
+	{
+		cout << "Would you like to add one of these movies  to your cart? (Y/N)" << endl;
+		cin >> addDecision;
+		//Verify user input
+		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+		{	
+			cin.clear();	//Clear bad input flag
+			cin.ignore(10000, '\n');	//Discard input
+			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
+			cout << "or enter 'N' to start a new search." << endl;
+			cin >> addDecision;
+		}
+		//Action based on user input
+		if (toupper(addDecision) == 'Y')
+		{
+			int movieNumber = 0;
+			cout << "Please enter the movie number you would like to add." << endl;
+			cout << "For example, if you wish to add result 1. Avatar to the cart, type 1" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cin >> movieNumber;
+			if(movieNumber = 0 || movieNumber > results.size())
+			{
+				cout << "Try again, options are 1 though " << results.size()  << endl;
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cin >> movieNumber;
+			}
+			else
+			{
+				Video vid = results[(movieNumber - 1)];
+				cout << "video title is " << vid.getTitle() << endl;
+				newCart.addVidToCart(vid);
+				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
+				//TODO send back to main menu?
+			}
+		}	
+		if(toupper(addDecision) == 'N')
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "No movies added to your cart, returning to main menu" << endl;			
+		}
+				
+	}
+	else
+	{
+		cout << "Would you like to add this movie to your cart? (Y/N)" <<endl;
+		cin >> addDecision;
+	
+		//Verify user input
+		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
+		{
+			//cin.clear();	//Clear bad input flag
+			//cin.ignore(10000, '\n');	//Discard input
+			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
+			cout << "or enter 'N' to start a new search." << endl;
+			cin >> addDecision;
+		}		
+
+		//Action based on user input
+		if (toupper(addDecision) == 'Y')
+		{
+			cin.clear();
+			cin.ignore(1000,'\n');
+			Video vid = results[0];
+			newCart.addVidToCart(vid);
+			cout << vid.getTitle() << " was added to your cart! Returning to search by Title menu" << endl;
+			//TODO send back to main menu?
+		}
+		else if (toupper(addDecision) == 'N')
+		{
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "No movies added to your cart, returning to search by Title menu" << endl;			
+		}
+	}
+}
+
+/****************************************************************************************
 Main Menu Functions
 ****************************************************************************************/
 
@@ -227,103 +327,6 @@ void titleSearchVector(const vector<Video>& videos, vector<Video>& results, stri
     		results.push_back(videos[index]);  //if video is found, add it to results
        	index++;
     }
-}
-
-
-/*
-addToCart()
-Adds the desired movie to the cart
-and allows user to make another search.
-*/
-
-void addToCart(std::vector<Video> &results)
-{
-	char addDecision;		//variable to hold user choice
-	Cart newCart;
-	for(int index = 0; index < (results.size()); index++)
-	{
-		Video vid = results[index];
-		cout << index + 1 << ". " << vid.getTitle() << endl;
-	}
-	cout << "There are " << results.size() << " search results" << endl;
-	if(results.size() > 1)
-	{
-		cout << "Would you like to add one of these movies  to your cart? (Y/N)" << endl;
-		cin >> addDecision;
-		//Verify user input
-		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
-		{	
-			cin.clear();	//Clear bad input flag
-			cin.ignore(10000, '\n');	//Discard input
-			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
-			cout << "or enter 'N' to start a new search." << endl;
-			cin >> addDecision;
-		}
-		//Action based on user input
-		if (toupper(addDecision) == 'Y')
-		{
-			int movieNumber = 0;
-			cout << "Please enter the movie number you would like to add." << endl;
-			cout << "For example, if you wish to add result 1. Avatar to the cart, type 1" << endl;
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cin >> movieNumber;
-			if(movieNumber = 0 || movieNumber > results.size())
-			{
-				cout << "Try again, options are 1 though " << results.size()  << endl;
-				cin.clear();
-				cin.ignore(1000, '\n');
-				cin >> movieNumber;
-			}
-			else
-			{
-				Video vid = results[(movieNumber - 1)];
-				cout << "video title is " << vid.getTitle() << endl;
-				newCart.addVidToCart(vid);
-				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
-				//TODO send back to main menu?
-			}
-		}	
-		if(toupper(addDecision) == 'N')
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "No movies added to your cart, returning to main menu" << endl;			
-		}
-				
-	}
-	else
-	{
-		cout << "Would you like to add this movie to your cart? (Y/N)" <<endl;
-		cin >> addDecision;
-	
-		//Verify user input
-		while ((toupper(addDecision) != 'Y' && toupper(addDecision) != 'N'))
-		{
-			//cin.clear();	//Clear bad input flag
-			//cin.ignore(10000, '\n');	//Discard input
-			cout << "Please enter either 'Y' to add the movie to your cart, " << endl;
-			cout << "or enter 'N' to start a new search." << endl;
-			cin >> addDecision;
-		}		
-
-		//Action based on user input
-		if (toupper(addDecision) == 'Y')
-		{
-			cin.clear();
-			cin.ignore(1000,'\n');
-			Video vid = results[0];
-			newCart.addVidToCart(vid);
-			cout << vid.getTitle() << " was added to your cart! Returning to search by Title menu" << endl;
-			//TODO send back to main menu?
-		}
-		else if (toupper(addDecision) == 'N')
-		{
-			cin.clear();
-			cin.ignore(1000, '\n');
-			cout << "No movies added to your cart, returning to search by Title menu" << endl;			
-		}
-	}
 }
 
 /****************************************************************************************
