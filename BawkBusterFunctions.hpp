@@ -35,12 +35,15 @@ void mainMenu(std::vector<Video> &videoList);
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
 /*
-clear_screen()
+clearScreen()
 Function to remove all text from the console screen
 that functions with Windows and Linux operating systems.
+DOES NOT FUNCTION WITH Repl.it
+PLEASE DO NOT USE!
+COMMENT OUT WHERE SEEN!
 */
 
-void clear_screen();
+void clearScreen();
 
 /****************************************************************************************
 System Pause Function
