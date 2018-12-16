@@ -59,7 +59,7 @@ void Video::addToVector(Video videoIn)
     videos.push_back(videoIn);
 }
 
-void Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
+Video Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
 {
     Video result, temp;
     int index = 0;
@@ -75,6 +75,7 @@ void Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
        }
        index++;
     }
+    return result;
 }
 
     
