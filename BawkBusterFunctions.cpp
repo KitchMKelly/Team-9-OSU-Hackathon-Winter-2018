@@ -214,13 +214,13 @@ void displayMainMenu()
 	clearScreen();	//Clear screen before displaying menu
 	cout << "Welcome to BawkBuster!\n" << endl;
 	cout << "Select on of the following options:\n" << endl;
-	cout << "1: Search movies by Title" << endl;
-	cout << "2: Search movies by Genre" << endl;
-	cout << "3: Search movies by Director" << endl;
-	cout << "4: Review movies in your cart" << endl;
-	cout << "5: Check the rental price of movies in your cart" << endl;
-	cout << "6: Check Out\n" << endl;
-	cout << "Please enter a number between 1 and 6" << endl;
+	cout << "	1: Search Movies by Title" << endl;
+	cout << "	2: Search Movies by Genre" << endl;
+	cout << "	3: Search Movies by Director" << endl;
+	cout << "	4: Review Movies in Your Cart" << endl;
+	cout << "	5: Check the Rental Price of the Movies in Your Cart" << endl;
+	cout << "	6: Checkout\n" << endl;
+	cout << "Please Enter a Number between 1 and 6" << endl;
 }
 
 /*
@@ -570,16 +570,16 @@ void moviesInCartMain(Cart& newCart)
 	if(newCart.getNumCart() == 0)  //Andrew: if cart is empty, return to the main menu
 		return;
 	cout << endl;
-	cout << "You have " << newCart.getNumCart() << " movies in your Cart.\n";
-	cout << "The total price is $" << 
+	cout << "You Have " << newCart.getNumCart() << " Movies in Your Cart.\n";
+	cout << "The Total Price is $" << 
 	std::fixed << std::setprecision(2) << newCart.getTPrice() << "\n\n";
-	cout << "Would you like to:\n";
-	cout << "	1. Check Out?\n";
-	cout << "	2. Clear Cart?\n";
-	cout << "	3. Remove Last Item Added?\n";
-	cout << "	4. Return to Main Menu?\n";
+	cout << "Would You Like to:\n";
+	//cout << "	1. Check Out?\n";
+	cout << "	1. Clear Cart?\n";
+	cout << "	2. Remove Last Item Added?\n";
+	cout << "	3. Return to Main Menu to Checkout?\n";
 	//cout << "	5. Exit the Program?\n\n";  Andrew: User should only be able to exit from the main menu
-	cout << "Please enter your choice (1 - 4)\n";
+	cout << "Please Enter Your Choice (1 - 3)\n";
 
 	int choice;
 	cin >> choice;
@@ -588,11 +588,11 @@ void moviesInCartMain(Cart& newCart)
 
 	switch (choice)
 	{
-		case 1:
+		/*case 1:
 		{	checkOutMain(newCart);
 			break;
-		}
-		case 2:
+		}*/ //Herbert:Commented Out and Instead Make the User Enter The Main Menu To Leave
+		case 1:
 		{
 			newCart.emptyCart();
 			clearScreen();
@@ -600,13 +600,13 @@ void moviesInCartMain(Cart& newCart)
 			systemPause();
 			break;
 		}
-		case 3:
+		case 2:
 		{
 			newCart.unAddToCart();  //removes last video from real cart
 			systemPause();
 			break;
 		}
-		case 4:
+		case 3:
 			break; //Andrew: this will automatically return to main menu, no need to add anything here
 
 		//Andrew: User should only be able to exit the program from the main menu so I deleted the option
@@ -696,7 +696,7 @@ Allows user to check out/exit program.
 Allows option to return to main menu if desired.
 */
 void checkOutMain(Cart newCart)
-{
+{	
 	displayCheckOut(newCart);
 }
 
@@ -709,10 +709,13 @@ The user arrives at this menu from the main menu if
 
 void displayCheckOut(Cart newCart)
 {
-	cout << "Thank you for choosing BawkBuster!" << endl;
-	cout << "Your total price is: " << std::fixed << std::setprecision(2) 
+	cout << "\nThank you for choosing BawkBuster!\n" << endl;
+	cout << "Your total price is: $" << std::fixed << std::setprecision(2) 
 	<< newCart.getTPrice() << endl;
-	cout << "Enjoy your movies!" << endl;
+	cout << "\nAs a Thank You, the Charge Will Be Removed So Your Movies Are Free!" << endl;
+	cout << "\nEnjoy Your Movies!" << endl;
+	cout << "And Remember!" << endl;
+	cout << "Be Kind, Rewind" << endl;
 	systemPause();	//Waits for user input
 			//before exiting program.
 }
