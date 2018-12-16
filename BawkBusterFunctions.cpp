@@ -190,13 +190,13 @@ Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
 */
 
-void mainMenu(vector<Video> &videoList)
+void mainMenu(Cart newCart, vector<Video> &videoList)
 {
 	int choiceMain;						//Variable to hold user's menu choice
 	displayMainMenu();					//Display the menu
 	cin >> choiceMain;					//Get user's choice
 	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
-	mainMenuSwitch(choiceMain, videoList);			//Use switch to navigate to desired submenu
+	mainMenuSwitch(choiceMain, newCart, videoList);			//Use switch to navigate to desired submenu
 }
 
 /*
@@ -244,17 +244,17 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain, vector<Video> &videoList)
+void mainMenuSwitch(int choiceMain, Cart newCart, vector<Video> &videoList)
 {
 	switch (choiceMain) 
 	{
-		case 1: titleSearchMain(videoList);
+		case 1: titleSearchMain(newCart, videoList);
 			break;
-		case 2: genreSearchMain(videoList);
+		case 2: genreSearchMain(newCart, videoList);
 			break;
-		case 3: directorSearchMain(videoList);
+		case 3: directorSearchMain(newCart, videoList);
 			break;
-		case 4: moviesInCartMain();
+		case 4: moviesInCartMain(newCart);
 			break;
 		case 5: checkPriceMain();
 			break;
@@ -574,7 +574,6 @@ void moviesInCartMain(Cart cartIn)
 	validateCartChoice(choice);
 	//Perform the desired action
 	moviesInCartSwitch(choice, cartIn);
-
 }
 
 /*
@@ -588,12 +587,6 @@ void displayMoviesInCart(Cart current)
 {
 	clear_screen();	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
-	std::vector<Video> inCart;
-	inCart = current.getVideos();
-	for(int index = 0; index < inCart.size(); index++)
-	{
-		cout << inCart[index].getTitle << endl;
-	}
 	//TODO: Show what's in the user's cart
 	systemPause();	//Wait for user input
 }

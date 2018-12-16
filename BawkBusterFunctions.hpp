@@ -90,7 +90,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain, std::vector<Video> &videoList);
+void mainMenuSwitch(int choiceMain,Cart newCart, std::vector<Video> &videoList);
 
 /****************************************************************************************
 Title Search Submenu Functions
@@ -202,7 +202,9 @@ Returns user to main menu when finished.
 Possibly allows user to check out from here?
 */
 
+
 void moviesInCartMain(Cart);
+
 
 /*
 void displayMoviesInCart()

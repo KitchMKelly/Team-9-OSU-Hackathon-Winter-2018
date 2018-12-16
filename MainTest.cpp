@@ -8,6 +8,7 @@ using std::vector;
 
 int main()
 {
+    Cart newCart;
     int mainMenuChoice = 0;
     vector<Video> videoList;  //creates an empty vector of Videos called videoList
     
@@ -22,13 +23,13 @@ int main()
         validateMainMenuChoice(mainMenuChoice);  //ensures input is an integer and between 1 and 6
 
         if (mainMenuChoice == 1)  //title search
-            titleSearchMain(videoList);
+            titleSearchMain(newCart, videoList);
         else if (mainMenuChoice == 2)  //genre search
-            genreSearchMain(videoList);
+            genreSearchMain(newCart, videoList);
         else if (mainMenuChoice == 3)  //director search
-            directorSearchMain(videoList);
+            directorSearchMain(newCart, videoList);
         else if (mainMenuChoice == 4)  //check cart
-            moviesInCartMain();
+            moviesInCartMain(newCart);
         else if (mainMenuChoice == 5)  //calculate total
             checkPriceMain();
 
