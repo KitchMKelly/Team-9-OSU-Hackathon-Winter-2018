@@ -23,5 +23,9 @@ Created by:
 * jmalbert7
 * herbishere
 * aw-leigh
+
+
 OSU Winter 2018 Hackathon organized by the OSU Hackathon Club
+
+
 Data Set from [data.world](https://data.world/popculture/imdb-500-movie-dataset)
