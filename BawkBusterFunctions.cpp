@@ -91,10 +91,9 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart(std::vector<Video> &results)
+void addToCart(Cart newCart, std::vector<Video> &results)
 {
 	char addDecision;		//variable to hold user choice
-	Cart newCart;
 	for(int index = 0; index < (results.size()); index++)
 	{
 		Video vid = results[index];
@@ -276,7 +275,7 @@ Allows user to add movies found in search to cart.
 Returns user to main menu when user is done searching by title.
 */
 
-void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so it's available to search
+void titleSearchMain(Cart newCart, vector<Video>& videoList)  //Needed to pass the vector so it's available to search
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
 	string title = "";			//Initalize new string to hold user input
@@ -303,7 +302,7 @@ void titleSearchMain(vector<Video>& videoList)  //Needed to pass the vector so i
 		{
 			clear_screen();
 			cout << "Movie found!!\n";  //results now holds the movie!!
-			addToCart(results);				//User decides if (s)he wants to add the movie to the cart,
+			addToCart(newCart, results);				//User decides if (s)he wants to add the movie to the cart,
 										//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -341,7 +340,7 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain(vector<Video>& videoList)
+void genreSearchMain(Cart newCart, vector<Video>& videoList)
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
 	int genreChoice = 0;		//Initalize new string to hold user input
@@ -387,7 +386,7 @@ void genreSearchMain(vector<Video>& videoList)
 			{
 				cout << i << ". " << results[i].getTitle() << endl;
 			}
-			addToCart(results);	//User decides if (s)he wants to add the movie to the cart,
+			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -473,7 +472,7 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain(vector<Video>& videoList)
+void directorSearchMain(Cart newCart, vector<Video>& videoList)
 {
 	vector<Video> results;		//Initialize an empty vector of movie results
 	string director = "";			//Initalize new string to hold user input
@@ -501,7 +500,7 @@ void directorSearchMain(vector<Video>& videoList)
 			{
 				cout << i << ". " << results[i].getTitle() << endl;
 			}
-			addToCart(results);	//User decides if (s)he wants to add the movie to the cart,
+			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
@@ -572,9 +571,8 @@ The user arrives at this menu from the main menu if
 (s)he selects option 4.
 */
 
-void displayMoviesInCart()
+void displayMoviesInCart(Cart current)
 {
-	Cart current;
 	clear_screen();	//Clear screen before displaying menu
 	cout << "Here's what's in your cart:" << endl;
 	std::vector<Video> inCart;
