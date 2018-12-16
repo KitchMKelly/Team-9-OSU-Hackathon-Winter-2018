@@ -53,10 +53,20 @@ Function that pauses the program until user input is received
 void systemPause();
 
 /****************************************************************************************
-Main Menu Functions
+Add to Cart Function
 ****************************************************************************************/
 
+/*
+addToCart()
+Adds the desired movie to the cart
+and allows user to make another search.
+*/
 
+void addToCart(std::vector<Video> &results);
+
+/****************************************************************************************
+Main Menu Functions
+****************************************************************************************/
 
 /*
 displayMainMenu()
@@ -102,15 +112,6 @@ takes a const vector of movies to search, a vector of videos to add results to, 
 */
 
 void titleSearchVector(const std::vector<Video>& videos, std::vector<Video>& results, std::string titleIn);
-
-
-/*
-addToCart()
-Adds the desired movie to the cart
-and allows user to make another search.
-*/
-
-void addToCart(std::vector<Video> &results);
 
 /****************************************************************************************
 Genre Search Submenu Functions
