@@ -21,6 +21,8 @@ Fixes
 -completed unAddToCart, and clearCArt
 -displayPrice now works (also price display from the cart), format is $X.XX
 -search by title now works regardless of capitalization (or lack thereof)
+-genre search, if you say Y and add one to cart, it makes you press enter twice to return to menu
+-restructured genre search loop to prevent unwanted lists or menus from appearing
 
 
 
