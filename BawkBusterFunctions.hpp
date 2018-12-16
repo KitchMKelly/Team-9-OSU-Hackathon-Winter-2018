@@ -62,7 +62,7 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart(Cart newCart, std::vector<Video> &results);
+void addToCart(Cart &newCart, std::vector<Video> &results);
 
 /****************************************************************************************
 Main Menu Functions
