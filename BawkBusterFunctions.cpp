@@ -358,15 +358,13 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 	vector<Video> results;		//Initialize an empty vector of movie results
 	int genreChoice = -1;		//Initalize new string to hold user input
 	string genre = "";
+	displayGenreSearchMenu();
+	cin >> genreChoice;		//Get user input, store in 'genreChoice'
+	validateGenreMenuChoice(genreChoice);
 
 
-	
-	do{	
-
-		displayGenreSearchMenu();
-		cin >> genreChoice;			//Get user input, store in 'genreChoice'
-		validateGenreMenuChoice(genreChoice);
-	
+	while (genreChoice != 0)
+	{	
 		switch(genreChoice) 
 		{
 		case 1: genre = "Action";
@@ -409,9 +407,12 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 		//cin.clear();
 		//cin.ignore(1000, '\n');
 		std::cout << "Press enter to continue..." << endl;
+		displayGenreSearchMenu();
+		cin >> genreChoice;		//Get new user input
+		validateGenreMenuChoice(genreChoice);
 		//getline(cin, title);
-	} while (genreChoice != 0);	//As long as the user doesn't enter '0',
-								//(s)he can search as many times as desired.	
+	}	//As long as the user doesn't enter '0',
+		//(s)he can search as many times as desired.	
 	//TODO: Function to add individual movies from the searched genre to the cart
 	//TODO: Function to allow multiple searches of different genres
 	//TODO: Function to return to main menu
