@@ -327,10 +327,15 @@ void titleSearchVector(const vector<Video>& videos, vector<Video>& results, stri
     Video temp;  //creates a temporary video to hold values as we process vector
     int index = 0;
     int size = videos.size();
+    for(int i = 0; i < titleIn.size(); i++)
+    	titleIn.at(i) = toupper(titleIn.at(i));		//Convert all chars in string "titleIn" to uppercase
     while(index < size)
     {
        	temp = videos[index];  //set temp equal to the video at [index]
-       	if(temp.getTitle() == titleIn)
+	std::string tempName = temp.getTitle();
+	for (int i = 0; i < tempName.size(); i++)
+        	tempName.at(i) = toupper(tempName.at(i));	//Convert all chars in string "tempName" to uppercase
+       	if(tempName == titleIn)
     		results.push_back(videos[index]);  //if video is found, add it to results
        	index++;
     }
