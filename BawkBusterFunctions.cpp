@@ -554,14 +554,26 @@ Returns user to main menu when finished.
 Possibly allows user to check out from here?
 */
 
-void moviesInCartMain(Cart newCart)
+void moviesInCartMain(Cart cartIn)
 {
 	clear_screen();
-	displayMoviesInCart(newCart);
-	//TODO: Allow users to remove movies from cart
-	//TODO: Function to display price here?
-	//TODO: Function to return user to main menu
-	//TODO: Function to allow user to check out/exit program?
+	displayMoviesInCart(cartIn);
+	cout << "You have " << cartIn.getNumCart << " movies in your Cart.\n";
+	cout << "The total price is $" << cartIn.getTPrice() << "\n\n";
+	cout << "Would you like to:";
+	cout << "	1. Check Out?\n";
+	cout << "	2. Clear Cart?\n";
+	cout << "	3. Remove Last Item Added?\n";
+	cout << "	4. Return to Main Menu?\n";
+	cout << "	5. Exit the Program?\n\n";
+	cout << "Plase enter your choice (1 - 5)\n";
+	//Get user's choice
+	int choice;
+	cin >> choice;
+	//Validate user's choice
+	validateCartChoice(choice);
+	//Perform the desired action
+	moviesInCartSwitch(choice, cartIn);
 }
 
 /*
@@ -577,6 +589,51 @@ void displayMoviesInCart(Cart current)
 	cout << "Here's what's in your cart:" << endl;
 	//TODO: Show what's in the user's cart
 	systemPause();	//Wait for user input
+}
+
+/* Validates the user's input for the Cart sub-menu */
+
+void validateCartChoice(int choice);
+{
+	while (!cin || choice > 5 || choice < 1)
+	{
+		cin.clear(); //clear bad input flag
+		cin.ignore(10000, '\n'); //Discard input
+		cout << "PLase enter a number between 1 and 5" << endl;
+		cin >> choice;
+	}
+
+/* Uses user input to perform a desired function */
+
+void moviesInCartSwitch(int choiceMain, Cart cartIn)
+{
+	switch (choiceMain)
+	{
+		case 1:
+		{	checkOutMain();
+			break;
+		}
+		case 2:
+		{
+			cartIn.emptyCart();
+			cout << "Your cart has been cleared!\n";
+			break;
+		}
+		case 3:
+		{
+			cartIn.unAddToCart();
+			cout << "The Last Item You've Added Has Been Removed!";
+			break;
+		}
+		case 4:
+		{	// TODO:FUNCTION TO RETURN TO THE MAIN MENU
+			break;
+		}
+		case 5:
+		{	// TODO:FUNCTION TO EXIT THE PROGRAM
+			break;
+		}
+			
 }
 
 /****************************************************************************************

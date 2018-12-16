@@ -202,7 +202,9 @@ Returns user to main menu when finished.
 Possibly allows user to check out from here?
 */
 
-void moviesInCartMain(Cart newCart);
+
+void moviesInCartMain(Cart);
+
 
 /*
 void displayMoviesInCart()
@@ -211,7 +213,15 @@ The user arrives at this menu from the main menu if
 (s)he selects option 4.
 */
 
-void displayMoviesInCart(Cart newCart);
+void displayMoviesInCart(Cart);
+
+/* Validates the user's input for the Cart sub-menu */
+
+void validateCartChoice(int);
+
+/* Uses user input to perform a desired function */
+
+void moviesInCartSwitch(int, Cart);
 
 /****************************************************************************************
 Check Price Submenu Functions
