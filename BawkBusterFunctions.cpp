@@ -407,7 +407,8 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
 		//cin.clear();
-		cin.ignore(1000, '\n');
+		//cin.ignore(1000, '\n');
+		std::cout << "Press enter to continue..." << endl;
 		//getline(cin, title);
 	} while (genreChoice != 0);	//As long as the user doesn't enter '0',
 								//(s)he can search as many times as desired.	
