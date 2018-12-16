@@ -7,6 +7,8 @@
 ******************************************************************************/
 // Cart.cpp
 #include "Cart.hpp"
+#include "Video.hpp"
+#include <iostream>
 
 /*****************************************************************************
 ** Description:	The default constructor for the Cart class. Initializes the
@@ -78,6 +80,11 @@ void Cart::addVidToCart(Video videoIn)
 	vidVector.push_back(videoIn);
 	numCart++;
 	totalPrice += PRICE; //adds the price after every additional video is put in;
+	std::cout << "in addVidToCart " << numCart << " price " << totalPrice << std::endl;
+	for(int i = 0; i < vidVector.size(); i++)
+	{
+		std::cout << vidVector[i].getTitle() << std::endl;
+	}
 }
 
 /*****************************************************************************

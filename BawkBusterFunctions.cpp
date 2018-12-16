@@ -94,11 +94,11 @@ and allows user to make another search.
 void addToCart(Cart newCart, std::vector<Video> &results)
 {
 	char addDecision;		//variable to hold user choice
-	for(int index = 0; index < (results.size()); index++)
+	/*for(int index = 0; index < (results.size()); index++)
 	{
 		Video vid = results[index];
 		cout << index + 1 << ". " << vid.getTitle() << endl;
-	}
+	}*/
 	cout << "There are " << results.size() << " search results" << endl;
 	if(results.size() > 1)
 	{
@@ -122,7 +122,7 @@ void addToCart(Cart newCart, std::vector<Video> &results)
 			cin.clear();
 			cin.ignore(1000, '\n');
 			cin >> movieNumber;
-			if(movieNumber = 0 || movieNumber > results.size())
+			if(movieNumber < 1 || movieNumber > results.size())
 			{
 				cout << "Try again, options are 1 though " << results.size()  << endl;
 				cin.clear();
@@ -135,7 +135,7 @@ void addToCart(Cart newCart, std::vector<Video> &results)
 				cout << "video title is " << vid.getTitle() << endl;
 				newCart.addVidToCart(vid);
 				cout << vid.getTitle() << " was added to your cart! Returning to main menu" << endl;
-				//TODO send back to main menu?
+				systemPause();
 			}
 		}	
 		if(toupper(addDecision) == 'N')
@@ -384,14 +384,16 @@ void genreSearchMain(Cart newCart, vector<Video>& videoList)
 			cout << "Movies found:\n";  //results now holds the movie!!
 			for (int i = 0; i < results.size(); i++)
 			{
-				cout << i << ". " << results[i].getTitle() << endl;
+				cout << i+1 << ". " << results[i].getTitle() << endl;
 			}
 			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
+			clear_screen();
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
 		cout << "Please enter another movie title,\n"
 			 << "or enter '0' to return to Main Menu." << endl;
+		systemPause();
 		//getline(cin, title);
 	}	
 	//TODO: Function to add individual movies from the searched genre to the cart
@@ -554,7 +556,7 @@ Returns user to main menu when finished.
 Possibly allows user to check out from here?
 */
 
-void moviesInCartMain(Cart cartIn)
+void moviesInCartMain(Cart newCart)
 {
 	clear_screen();
 	displayMoviesInCart(cartIn);
@@ -589,53 +591,6 @@ void displayMoviesInCart(Cart current)
 	cout << "Here's what's in your cart:" << endl;
 	//TODO: Show what's in the user's cart
 	systemPause();	//Wait for user input
-}
-
-/* Validates the user's input for the Cart sub-menu */
-
-void validateCartChoice(int choice)
-{
-	while (!cin || choice > 5 || choice < 1)
-	{
-		cin.clear(); //clear bad input flag
-		cin.ignore(10000, '\n'); //Discard input
-		cout << "PLase enter a number between 1 and 5" << endl;
-		cin >> choice;
-	}
-}
-
-/* Uses user input to perform a desired function */
-
-void moviesInCartSwitch(int choiceMain, Cart cartIn)
-{
-	switch (choiceMain)
-	{
-		case 1:
-		{	checkOutMain();
-			break;
-		}
-		case 2:
-		{
-			cartIn.emptyCart();
-			cout << "Your cart has been cleared!\n";
-			break;
-		}
-		case 3:
-		{
-			cartIn.unAddToCart();
-			cout << "The Last Item You've Added Has Been Removed!";
-			break;
-		}
-		case 4:
-		{	// TODO:FUNCTION TO RETURN TO THE MAIN MENU
-			break;
-		}
-		case 5:
-		{	// TODO:FUNCTION TO EXIT THE PROGRAM
-			break;
-		}
-	}
-			
 }
 
 /****************************************************************************************
