@@ -12,8 +12,6 @@ at the BeaverHacks Winter 2018 Hackathon.
 #include "Video.hpp"
 #include "Cart.hpp"
 
-int mainMenuChoice = 0;
-
 /****************************************************************************************
 Video Vector Functions
 ****************************************************************************************/

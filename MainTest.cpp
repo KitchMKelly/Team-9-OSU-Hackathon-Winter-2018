@@ -6,12 +6,10 @@ using std::endl;
 using std::string;
 using std::vector;
 
-
-
 int main()
 {
-    Cart newCart;
     int mainMenuChoice = 0;
+    Cart newCart;
     vector<Video> videoList;  //creates an empty vector of Videos called videoList to store movie data from file
     
     if(!importMovieDataFromFile(videoList))  //read in data from CSV
