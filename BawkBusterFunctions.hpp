@@ -62,7 +62,7 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart(std::vector<Video> &results);
+void addToCart(Cart newCart, std::vector<Video> &results);
 
 /****************************************************************************************
 Main Menu Functions
@@ -104,7 +104,7 @@ Allows user to add movies found in search to cart.
 Returns user to main menu when user is done searching by title.
 */
 
-void titleSearchMain(std::vector<Video>& videoList);
+void titleSearchMain(Cart newCart, std::vector<Video>& videoList);
 
 /*
 titleSearchVector()
@@ -125,7 +125,7 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain(std::vector<Video>& videoList);
+void genreSearchMain(Cart newCart, std::vector<Video>& videoList);
 
 /*
 void displayGenreSearchMenu()
@@ -168,7 +168,7 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain(std::vector<Video>& videoList);
+void directorSearchMain(Cart newCart, std::vector<Video>& videoList);
 
 /*
 void displayDirectorSearchMenu()
@@ -211,7 +211,7 @@ The user arrives at this menu from the main menu if
 (s)he selects option 4.
 */
 
-void displayMoviesInCart();
+void displayMoviesInCart(Cart newCart);
 
 /****************************************************************************************
 Check Price Submenu Functions
