@@ -559,9 +559,9 @@ Possibly allows user to check out from here?
 void moviesInCartMain(Cart newCart)
 {
 	clear_screen();
-	displayMoviesInCart(cartIn);
-	cout << "You have " << cartIn.getNumCart() << " movies in your Cart.\n";
-	cout << "The total price is $" << cartIn.getTPrice() << "\n\n";
+	displayMoviesInCart(newCart);
+	cout << "You have " << newCart.getNumCart() << " movies in your Cart.\n";
+	cout << "The total price is $" << newCart.getTPrice() << "\n\n";
 	cout << "Would you like to:\n";
 	cout << "	1. Check Out?\n";
 	cout << "	2. Clear Cart?\n";
@@ -575,7 +575,7 @@ void moviesInCartMain(Cart newCart)
 	//Validate user's choice
 	validateCartChoice(choice);
 	//Perform the desired action
-	moviesInCartSwitch(choice, cartIn);
+	moviesInCartSwitch(choice, newCart);
 }
 
 /*
