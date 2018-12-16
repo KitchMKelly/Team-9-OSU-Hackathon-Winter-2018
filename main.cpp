@@ -1,3 +1,6 @@
+/*
+This is the main() function used for the BawkBuster movie catalog project.
+*/
 #include "BawkBusterFunctions.hpp"
 
 using std::cout;
