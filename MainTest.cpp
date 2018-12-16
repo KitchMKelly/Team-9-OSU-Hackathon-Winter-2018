@@ -32,10 +32,10 @@ int main()
             moviesInCartMain(newCart);
         else if (mainMenuChoice == 5)  //calculate total
             displayPrice(newCart);
+	else if (mainMenuChoice == 6) // do checkout stuff
+	    checkOutMain(newCart);
 
     } while (mainMenuChoice != 6);  //Loop again if user did not select 6 to check out
-
-    //do checkout stuff
 
     return 0;
 }
