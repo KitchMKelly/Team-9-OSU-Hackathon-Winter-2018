@@ -80,11 +80,13 @@ void Cart::addVidToCart(Video videoIn)
 	vidVector.push_back(videoIn);
 	numCart++;
 	totalPrice += PRICE; //adds the price after every additional video is put in;
+	/*
 	std::cout << "in addVidToCart " << numCart << " price " << totalPrice << std::endl;
 	for(int i = 0; i < vidVector.size(); i++)
 	{
 		std::cout << vidVector[i].getTitle() << std::endl;
 	}
+	*/
 }
 
 /*****************************************************************************
@@ -113,9 +115,22 @@ void Cart::emptyCart()
 
 void Cart::unAddToCart()
 {
-	vidVector.pop_back();
-	numCart--;
-	totalPrice -= PRICE;
+	if(numCart == 0)
+	{
+		std::cout << std::endl <<"Your cart is already empty!" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(1024, '\n');	// Discart old input
+		std::cout << "Press enter to continue...";
+		std::cin.get();			// Proceed after new input from user
+	}
+	else
+	{
+		std::cout << vidVector[vidVector.size() - 1].getTitle() << " has been removed from your cart." << std::endl;
+		vidVector.pop_back();
+		numCart--;
+		totalPrice -= PRICE;
+	}
+
 }
 
 /*****************************************************************************

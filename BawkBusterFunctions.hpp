@@ -9,6 +9,7 @@ at the BeaverHacks Winter 2018 Hackathon.
 #include <vector>
 #include <fstream>
 #include <cstdlib>
+#include <iomanip>
 #include "Video.hpp"
 #include "Cart.hpp"
 
@@ -34,12 +35,15 @@ void mainMenu(std::vector<Video> &videoList);
 Clear Screen Function For Linux and Windows OS's
 ****************************************************************************************/
 /*
-clear_screen()
+clearScreen()
 Function to remove all text from the console screen
 that functions with Windows and Linux operating systems.
+DOES NOT FUNCTION WITH Repl.it
+PLEASE DO NOT USE!
+COMMENT OUT WHERE SEEN!
 */
 
-void clear_screen();
+void clearScreen();
 
 /****************************************************************************************
 System Pause Function
@@ -62,7 +66,7 @@ Adds the desired movie to the cart
 and allows user to make another search.
 */
 
-void addToCart(Cart newCart, std::vector<Video> &results);
+void addToCart(Cart &newCart, std::vector<Video> &results);
 
 /****************************************************************************************
 Main Menu Functions
@@ -90,7 +94,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain,Cart newCart, std::vector<Video> &videoList);
+void mainMenuSwitch(int choiceMain,Cart& newCart, std::vector<Video> &videoList);
 
 /****************************************************************************************
 Title Search Submenu Functions
@@ -104,7 +108,7 @@ Allows user to add movies found in search to cart.
 Returns user to main menu when user is done searching by title.
 */
 
-void titleSearchMain(Cart newCart, std::vector<Video>& videoList);
+void titleSearchMain(Cart& newCart, std::vector<Video>& videoList);
 
 /*
 titleSearchVector()
@@ -125,7 +129,7 @@ Allows user to add individual movies from that search to their cart.
 Returns user to main menu when finished.
 */
 
-void genreSearchMain(Cart newCart, std::vector<Video>& videoList);
+void genreSearchMain(Cart& newCart, std::vector<Video>& videoList);
 
 /*
 void displayGenreSearchMenu()
@@ -168,7 +172,7 @@ Allows user to perform search multiple times.
 Returns user to main menu when finished.
 */
 
-void directorSearchMain(Cart newCart, std::vector<Video>& videoList);
+void directorSearchMain(Cart& newCart, std::vector<Video>& videoList);
 
 /*
 void displayDirectorSearchMenu()
@@ -203,7 +207,7 @@ Possibly allows user to check out from here?
 */
 
 
-void moviesInCartMain(Cart);
+void moviesInCartMain(Cart&);
 
 
 /*
@@ -213,7 +217,7 @@ The user arrives at this menu from the main menu if
 (s)he selects option 4.
 */
 
-void displayMoviesInCart(Cart);
+void displayMoviesInCart(Cart&);
 
 /* Validates the user's input for the Cart sub-menu */
 
@@ -235,7 +239,7 @@ Possibly allows user to proceed to checkout/exit program?
 Returns user to main menu when finished.
 */
 
-void checkPriceMain();
+//void checkPriceMain();
 
 /*
 void displayPrice()
@@ -245,7 +249,7 @@ The user arrives at this menu from the main menu if
 (s)he selects option 5.
 */
 
-void displayPrice();
+void displayPrice(Cart newCart);
 
 /****************************************************************************************
 Checkout Submenu Functions/End of Program Functions
@@ -257,7 +261,7 @@ Main function that executes when user selects option 6 from the main menu.
 Allows user to check out/exit program.
 Allows option to return to main menu if desired.
 */
-void checkOutMain();
+void checkOutMain(Cart newCart);
 
 /*
 void displayCheckOut()
@@ -266,4 +270,4 @@ The user arrives at this menu from the main menu if
 (s)he selects option 6.
 */
 
-void displayCheckOut();
+void displayCheckOut(Cart newCart);

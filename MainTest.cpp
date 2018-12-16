@@ -8,9 +8,9 @@ using std::vector;
 
 int main()
 {
-    Cart newCart;
     int mainMenuChoice = 0;
-    vector<Video> videoList;  //creates an empty vector of Videos called videoList
+    Cart newCart;
+    vector<Video> videoList;  //creates an empty vector of Videos called videoList to store movie data from file
     
     if(!importMovieDataFromFile(videoList))  //read in data from CSV
         return 1;  //if the file can't be opened, immediately end the program;
@@ -31,11 +31,11 @@ int main()
         else if (mainMenuChoice == 4)  //check cart
             moviesInCartMain(newCart);
         else if (mainMenuChoice == 5)  //calculate total
-            checkPriceMain();
+            displayPrice(newCart);
+	else if (mainMenuChoice == 6) // do checkout stuff
+	    checkOutMain(newCart);
 
     } while (mainMenuChoice != 6);  //Loop again if user did not select 6 to check out
-
-    //do checkout stuff
 
     return 0;
 }
