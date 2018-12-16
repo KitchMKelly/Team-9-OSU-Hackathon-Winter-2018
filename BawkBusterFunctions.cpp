@@ -53,9 +53,6 @@ Clear Screen Function For Linux and Windows OS's
 clearScreen()
 Function to remove all text from the console screen
 that functions with Windows and Linux operating systems.
-NOT FUNCTIONAL WITH Repl.it!
-COMMENT OUT WHERE SEEN, TO REMOVE
-"TERM environment variable not set." BANNER!
 */
 
 void clearScreen()
@@ -196,15 +193,20 @@ Main Menu Functions
 mainMenu()
 Main function that manages the user's access to submenus.
 Allows user to select a submenu choice.
+Exits if choiceMain == 0
 */
 
 void mainMenu(Cart& newCart, vector<Video> &videoList)
 {
 	int choiceMain;						//Variable to hold user's menu choice
-	displayMainMenu();					//Display the menu
-	cin >> choiceMain;					//Get user's choice
-	validateMainMenuChoice(choiceMain);	//Make sure user entered a valid choice
-	//mainMenuSwitch(choiceMain, newCart, videoList);			//Use switch to navigate to desired submenu
+	do //If choiceMain == 0, the program terminates
+  {
+    displayMainMenu();  //Display main menu
+    cin >> choiceMain;  //Get user's choice
+    validateMainMenuChoice(choiceMain); //Make sure user enter valid choice
+    mainMenuSwitch(choiceMain, newCart, videoList); //Conduct menu navigation
+  }
+  while (choiceMain != 0);
 }
 
 /*
@@ -252,7 +254,7 @@ void mainMenuSwitch(int choiceMain)
 Uses user input to direct to desired sub menu.
 */
 
-void mainMenuSwitch(int choiceMain, Cart& newCart, vector<Video> &videoList)
+void mainMenuSwitch(int &choiceMain, Cart& newCart, vector<Video> &videoList)
 {
 	switch (choiceMain) 
 	{
@@ -266,7 +268,7 @@ void mainMenuSwitch(int choiceMain, Cart& newCart, vector<Video> &videoList)
 			break;
 		case 5: displayPrice(newCart);
 			break;
-		case 6: checkOutMain(newCart);
+		case 6: checkOutMain(newCart, choiceMain);
 			break;
 	}
 }
@@ -328,13 +330,13 @@ void titleSearchVector(const vector<Video>& videos, vector<Video>& results, stri
     int index = 0;
     int size = videos.size();
     for(int i = 0; i < titleIn.size(); i++)
-    	titleIn.at(i) = toupper(titleIn.at(i));		//Convert all chars in string "titleIn" to uppercase
+      titleIn.at(i) = toupper(titleIn.at(i));
     while(index < size)
     {
        	temp = videos[index];  //set temp equal to the video at [index]
-	std::string tempName = temp.getTitle();
-	for (int i = 0; i < tempName.size(); i++)
-        	tempName.at(i) = toupper(tempName.at(i));	//Convert all chars in string "tempName" to uppercase
+        std::string tempName = temp.getTitle();
+        for (int i = 0; i < tempName.size(); i++)
+          tempName.at(i) = toupper(tempName.at(i));
        	if(tempName == titleIn)
     		results.push_back(videos[index]);  //if video is found, add it to results
        	index++;
@@ -358,13 +360,14 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 	vector<Video> results;		//Initialize an empty vector of movie results
 	int genreChoice = -1;		//Initalize new string to hold user input
 	string genre = "";
-	displayGenreSearchMenu();
-	cin >> genreChoice;		//Get user input, store in 'genreChoice'
-	validateGenreMenuChoice(genreChoice);
+  displayGenreSearchMenu();
+  cin >> genreChoice;
+  validateGenreMenuChoice(genreChoice); //Get user input, store in 'genreChoice'
 
 
-	while (genreChoice != 0)
-	{	
+	
+	while (genreChoice != 0)	
+  {
 		switch(genreChoice) 
 		{
 		case 1: genre = "Action";
@@ -406,13 +409,14 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 		results.clear(); //delete everything from the vector to prepare for the next search
 		//cin.clear();
 		//cin.ignore(1000, '\n');
-		std::cout << "Press enter to continue..." << endl;
-		displayGenreSearchMenu();
-		cin >> genreChoice;		//Get new user input
-		validateGenreMenuChoice(genreChoice);
+    std::cout << "Press enter to continue..." << endl;
+    displayGenreSearchMenu();
+    cin >> genreChoice; //Get user input again, store in 'genreChoice'
+    validateGenreMenuChoice(genreChoice);
+
 		//getline(cin, title);
 	}	//As long as the user doesn't enter '0',
-		//(s)he can search as many times as desired.	
+								//(s)he can search as many times as desired.	
 	//TODO: Function to add individual movies from the searched genre to the cart
 	//TODO: Function to allow multiple searches of different genres
 	//TODO: Function to return to main menu
@@ -705,10 +709,28 @@ Main function that executes when user selects option 6 from the main menu.
 Allows user to check out/exit program.
 Allows option to return to main menu if desired.
 */
-void checkOutMain(Cart newCart)
+void checkOutMain(Cart newCart, int &choiceMain)
 {	
-	displayCheckOut(newCart);
-}
+	char readyCheckOut;
+  std::cout << "Ready to check out? (Y/N)" << endl;
+  std::cin >> readyCheckOut;
+
+  while (!cin || (toupper(readyCheckOut) != 'Y' && toupper(readyCheckOut) != 'N'))
+  {
+    std::cout << "Please enter 'Y' to proceed to check out, "<<
+    "or enter 'N' to return to the main menu." << endl;
+    std::cin >> readyCheckOut;
+  }
+  if (toupper(readyCheckOut) == 'N')
+  {
+    std::cout << "Returning to main menu..." << endl;
+  }
+  else if (toupper(readyCheckOut) == 'Y')
+  {  //if user wants to check out,
+    displayCheckOut(newCart);           //normal check out stuff happens,
+    choiceMain = 0; //sets choiceMain = 0; sending termination
+  }                 //signal to mainMenu() to exit while loop                
+}                                     
 
 /*
 void displayCheckOut()

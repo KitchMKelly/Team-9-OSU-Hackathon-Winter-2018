@@ -6,6 +6,8 @@
 ******************************************************************************/
 #include <iostream>
 #include <vector>
+#include<stdio.h>
+#include<ctype.h>
 #include "Video.hpp"
 
 Video::Video()  //default constructor with junk values
@@ -59,7 +61,7 @@ void Video::addToVector(Video videoIn)
     videos.push_back(videoIn);
 }
 
-Video Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
+void Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
 {
     Video result, temp;
     int index = 0;
@@ -75,7 +77,6 @@ Video Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
        }
        index++;
     }
-    return result;
 }
 
     
