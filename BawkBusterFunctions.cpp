@@ -558,7 +558,7 @@ void moviesInCartMain(Cart cartIn)
 {
 	clear_screen();
 	displayMoviesInCart(cartIn);
-	cout << "You have " << cartIn.getNumCart << " movies in your Cart.\n";
+	cout << "You have " << cartIn.getNumCart() << " movies in your Cart.\n";
 	cout << "The total price is $" << cartIn.getTPrice() << "\n\n";
 	cout << "Would you like to:";
 	cout << "	1. Check Out?\n";
@@ -593,7 +593,7 @@ void displayMoviesInCart(Cart current)
 
 /* Validates the user's input for the Cart sub-menu */
 
-void validateCartChoice(int choice);
+void validateCartChoice(int choice)
 {
 	while (!cin || choice > 5 || choice < 1)
 	{
@@ -602,6 +602,7 @@ void validateCartChoice(int choice);
 		cout << "PLase enter a number between 1 and 5" << endl;
 		cin >> choice;
 	}
+}
 
 /* Uses user input to perform a desired function */
 
@@ -633,6 +634,7 @@ void moviesInCartSwitch(int choiceMain, Cart cartIn)
 		{	// TODO:FUNCTION TO EXIT THE PROGRAM
 			break;
 		}
+	}
 			
 }
 
