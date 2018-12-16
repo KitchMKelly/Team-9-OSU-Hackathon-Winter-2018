@@ -292,7 +292,7 @@ void titleSearchMain(Cart& newCart, vector<Video>& videoList)  //Needed to pass 
 	cin.ignore(10000, '\n');	//Discard input
 	//clearScreen();				//Clear screen before displaying menu
 	cout << "Search Movies by: Title\n" << endl;
-	cout << "Enter the title of the movie you are searching for,\n" 
+	cout << "Enter the complete title of the movie you are searching for,\n" 
 		<< "or enter '0' to return to Main Menu." << endl;
 
 	getline(cin, title);		//Get user input, store in 'title'
@@ -540,7 +540,7 @@ void displayDirectorSearchMenu()
 {
 	//clearScreen();	//Clear screen before displaying menu
 	cout << "Search movies by: Director\n" << endl;
-	cout << "Enter the name of a director,\n"
+	cout << "Enter the full name of a director,\n"
 		<< "or type '0' to return to the main menu." << endl;
 }
 
