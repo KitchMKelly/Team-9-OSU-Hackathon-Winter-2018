@@ -261,7 +261,7 @@ void mainMenuSwitch(int choiceMain, Cart& newCart, vector<Video> &videoList)
 			break;
 		case 4: moviesInCartMain(newCart);
 			break;
-		case 5: checkPriceMain();
+		case 5: displayPrice(newCart);
 			break;
 		case 6: checkOutMain(newCart);
 			break;
@@ -571,7 +571,8 @@ void moviesInCartMain(Cart& newCart)
 		return;
 	cout << endl;
 	cout << "You have " << newCart.getNumCart() << " movies in your Cart.\n";
-	cout << "The total price is $" << newCart.getTPrice() << "\n\n";
+	cout << "The total price is $" << 
+	std::fixed << std::setprecision(2) << newCart.getTPrice() << "\n\n";
 	cout << "Would you like to:\n";
 	cout << "	1. Check Out?\n";
 	cout << "	2. Clear Cart?\n";
@@ -666,12 +667,7 @@ Possibly allows user to proceed to checkout/exit program?
 Returns user to main menu when finished.
 */
 
-void checkPriceMain()
-{
-	displayPrice();
-	//TODO: Function to allow user to check out/exit program?
-	//TODO: Function to return user to main menu
-}
+//Andrew: This is redundant with checking the cart, now main directly calls displayPrice.
 
 /*
 void displayPrice()
@@ -681,11 +677,10 @@ The user arrives at this menu from the main menu if
 (s)he selects option 5.
 */
 
-void displayPrice()
+void displayPrice(Cart newCart)
 {
-	cout << "Current price of the movies in your cart:\n" << 
-		//whatever variable holds total price <<
-		endl;
+	cout << endl << "Current price of the movies in your cart: \n$" << 
+	std::fixed << std::setprecision(2) << newCart.getTPrice() << endl;
 	systemPause();	//Waits for user input
 			//before returning to main menu
 }
@@ -715,7 +710,8 @@ The user arrives at this menu from the main menu if
 void displayCheckOut(Cart newCart)
 {
 	cout << "Thank you for choosing BawkBuster!" << endl;
-	cout << "Your total price is: " << newCart.getTPrice() << endl;
+	cout << "Your total price is: " << std::fixed << std::setprecision(2) 
+	<< newCart.getTPrice() << endl;
 	cout << "Enjoy your movies!" << endl;
 	systemPause();	//Waits for user input
 			//before exiting program.

@@ -31,7 +31,7 @@ int main()
         else if (mainMenuChoice == 4)  //check cart
             moviesInCartMain(newCart);
         else if (mainMenuChoice == 5)  //calculate total
-            checkPriceMain();
+            displayPrice(newCart);
 
     } while (mainMenuChoice != 6);  //Loop again if user did not select 6 to check out
 

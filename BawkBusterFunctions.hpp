@@ -9,6 +9,7 @@ at the BeaverHacks Winter 2018 Hackathon.
 #include <vector>
 #include <fstream>
 #include <cstdlib>
+#include <iomanip>
 #include "Video.hpp"
 #include "Cart.hpp"
 
@@ -235,7 +236,7 @@ Possibly allows user to proceed to checkout/exit program?
 Returns user to main menu when finished.
 */
 
-void checkPriceMain();
+//void checkPriceMain();
 
 /*
 void displayPrice()
@@ -245,7 +246,7 @@ The user arrives at this menu from the main menu if
 (s)he selects option 5.
 */
 
-void displayPrice();
+void displayPrice(Cart newCart);
 
 /****************************************************************************************
 Checkout Submenu Functions/End of Program Functions
