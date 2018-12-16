@@ -28,4 +28,4 @@ Created by:
 OSU Winter 2018 Hackathon organized by the OSU Hackathon Club
 
 
-Data Set from [data.world](https://data.world/popculture/imdb-500-movie-dataset)
+Data Set from [data.world](https://data.world/popculture/imdb-5000-movie-dataset)
