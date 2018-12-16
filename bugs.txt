@@ -20,6 +20,7 @@ Fixes
 -added check to unAddToCart to make sure cart isn't already empty
 -completed unAddToCart, and clearCArt
 -displayPrice now works (also price display from the cart), format is $X.XX
+-search by title now works regardless of capitalization (or lack thereof)
 
 
 
