@@ -597,6 +597,54 @@ void displayMoviesInCart(Cart current)
 Check Price Submenu Functions
 ****************************************************************************************/
 
+/* Validates the user's input for the Cart sub-menu */
+
+void validateCartChoice(int choice)
+{
+	while (!cin || choice > 5 || choice < 1)
+	{
+		cin.clear(); //clear bad input flag
+		cin.ignore(10000, '\n'); //Discard input
+		cout << "PLase enter a number between 1 and 5" << endl;
+		cin >> choice;
+	}
+}
+
+/* Uses user input to perform a desired function */
+
+void moviesInCartSwitch(int choiceMain, Cart cartIn)
+{
+	switch (choiceMain)
+	{
+		case 1:
+		{	checkOutMain();
+			break;
+		}
+		case 2:
+		{
+			cartIn.emptyCart();
+			cout << "Your cart has been cleared!\n";
+			break;
+		}
+		case 3:
+		{
+			cartIn.unAddToCart();
+			cout << "The Last Item You've Added Has Been Removed!";
+			break;
+		}
+		case 4:
+		{	// TODO:FUNCTION TO RETURN TO THE MAIN MENU
+			break;
+		}
+		case 5:
+		{	// TODO:FUNCTION TO EXIT THE PROGRAM
+			break;
+		}
+	}
+			
+}
+
+
 /*
 checkPriceMain()
 Main function that executes when user selects option 5 from the main menu.
