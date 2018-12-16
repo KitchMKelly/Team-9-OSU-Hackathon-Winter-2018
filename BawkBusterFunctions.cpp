@@ -95,12 +95,6 @@ and allows user to make another search.
 void addToCart(Cart &newCart, std::vector<Video> &results)
 {
 	char addDecision;		//variable to hold user choice
-	/*for(int index = 0; index < (results.size()); index++)
-	{
-		Video vid = results[index];
-		cout << index + 1 << ". " << vid.getTitle() << endl;
-	}*/
-	
 	if(results.size() > 1)
 	{
 		cout << endl << "There are " << results.size() << " search results" << endl;
@@ -200,13 +194,13 @@ void mainMenu(Cart& newCart, vector<Video> &videoList)
 {
 	int choiceMain;						//Variable to hold user's menu choice
 	do //If choiceMain == 0, the program terminates
-  {
-    displayMainMenu();  //Display main menu
-    cin >> choiceMain;  //Get user's choice
-    validateMainMenuChoice(choiceMain); //Make sure user enter valid choice
-    mainMenuSwitch(choiceMain, newCart, videoList); //Conduct menu navigation
-  }
-  while (choiceMain != 0);
+	{
+		displayMainMenu();  //Display main menu
+   		cin >> choiceMain;  //Get user's choice
+    		validateMainMenuChoice(choiceMain); //Make sure user enter valid choice
+    		mainMenuSwitch(choiceMain, newCart, videoList); //Conduct menu navigation
+	}
+  	while (choiceMain != 0);
 }
 
 /*
@@ -360,30 +354,28 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 	vector<Video> results;		//Initialize an empty vector of movie results
 	int genreChoice = -1;		//Initalize new string to hold user input
 	string genre = "";
-  displayGenreSearchMenu();
-  cin >> genreChoice;
-  validateGenreMenuChoice(genreChoice); //Get user input, store in 'genreChoice'
-
-
+	displayGenreSearchMenu();
+	cin >> genreChoice;
+	validateGenreMenuChoice(genreChoice); //Get user input, store in 'genreChoice'
 	
-	while (genreChoice != 0)	
-  {
+	while (genreChoice != 0)
+	{
 		switch(genreChoice) 
 		{
-		case 1: genre = "Action";
-			break;
-		case 2: genre = "Adventure"; 
-			break;		
-		case 3: genre = "Comedy"; 
-			break;
-		case 4: genre = "Romance"; 
-			break;
-		case 5: genre = "Horror"; 
-			break;
-		case 6: genre = "Animation"; 
-			break;
-		case 7: genre = "Other"; //this one is going to be more complicated
-			break;				 //since we can't do a simple text match		
+			case 1: genre = "Action";
+				break;
+			case 2: genre = "Adventure"; 
+				break;		
+			case 3: genre = "Comedy"; 
+				break;
+			case 4: genre = "Romance"; 
+				break;
+			case 5: genre = "Horror"; 
+				break;
+			case 6: genre = "Animation"; 
+				break;
+			case 7: genre = "Other";	//this one is going to be more complicated
+				break;			//since we can't do a simple text match		
 		}		
 
 						
@@ -409,17 +401,12 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 		results.clear(); //delete everything from the vector to prepare for the next search
 		//cin.clear();
 		//cin.ignore(1000, '\n');
-    std::cout << "Press enter to continue..." << endl;
-    displayGenreSearchMenu();
-    cin >> genreChoice; //Get user input again, store in 'genreChoice'
-    validateGenreMenuChoice(genreChoice);
-
-		//getline(cin, title);
+		std::cout << "Press enter to continue..." << endl;
+		displayGenreSearchMenu();
+		cin >> genreChoice; //Get user input again, store in 'genreChoice'
+		validateGenreMenuChoice(genreChoice);
 	}	//As long as the user doesn't enter '0',
-								//(s)he can search as many times as desired.	
-	//TODO: Function to add individual movies from the searched genre to the cart
-	//TODO: Function to allow multiple searches of different genres
-	//TODO: Function to return to main menu
+		//(s)he can search as many times as desired.	
 }
 
 /*
@@ -712,24 +699,24 @@ Allows option to return to main menu if desired.
 void checkOutMain(Cart newCart, int &choiceMain)
 {	
 	char readyCheckOut;
-  std::cout << "Ready to check out? (Y/N)" << endl;
-  std::cin >> readyCheckOut;
+	std::cout << "Ready to check out? (Y/N)" << endl;
+	std::cin >> readyCheckOut;
 
-  while (!cin || (toupper(readyCheckOut) != 'Y' && toupper(readyCheckOut) != 'N'))
-  {
-    std::cout << "Please enter 'Y' to proceed to check out, "<<
-    "or enter 'N' to return to the main menu." << endl;
-    std::cin >> readyCheckOut;
-  }
-  if (toupper(readyCheckOut) == 'N')
-  {
-    std::cout << "Returning to main menu..." << endl;
-  }
-  else if (toupper(readyCheckOut) == 'Y')
-  {  //if user wants to check out,
-    displayCheckOut(newCart);           //normal check out stuff happens,
-    choiceMain = 0; //sets choiceMain = 0; sending termination
-  }                 //signal to mainMenu() to exit while loop                
+	while (!cin || (toupper(readyCheckOut) != 'Y' && toupper(readyCheckOut) != 'N'))
+	{
+		std::cout << "Please enter 'Y' to proceed to check out, "<<
+			"or enter 'N' to return to the main menu." << endl;
+		std::cin >> readyCheckOut;
+	}
+	if (toupper(readyCheckOut) == 'N')
+	{
+		std::cout << "Returning to main menu..." << endl;
+	}
+	else if (toupper(readyCheckOut) == 'Y')
+	{  //if user wants to check out,
+		displayCheckOut(newCart);	//normal check out stuff happens,
+		choiceMain = 0; //sets choiceMain = 0; sending termination
+	}                 	//signal to mainMenu() to exit while loop                
 }                                     
 
 /*
