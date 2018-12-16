@@ -559,11 +559,23 @@ Possibly allows user to check out from here?
 void moviesInCartMain(Cart newCart)
 {
 	clear_screen();
-	displayMoviesInCart(newCart);
-	//TODO: Allow users to remove movies from cart
-	//TODO: Function to display price here?
-	//TODO: Function to return user to main menu
-	//TODO: Function to allow user to check out/exit program?
+	displayMoviesInCart(cartIn);
+	cout << "You have " << cartIn.getNumCart() << " movies in your Cart.\n";
+	cout << "The total price is $" << cartIn.getTPrice() << "\n\n";
+	cout << "Would you like to:\n";
+	cout << "	1. Check Out?\n";
+	cout << "	2. Clear Cart?\n";
+	cout << "	3. Remove Last Item Added?\n";
+	cout << "	4. Return to Main Menu?\n";
+	cout << "	5. Exit the Program?\n\n";
+	cout << "Plase enter your choice (1 - 5)\n";
+	//Get user's choice
+	int choice;
+	cin >> choice;
+	//Validate user's choice
+	validateCartChoice(choice);
+	//Perform the desired action
+	moviesInCartSwitch(choice, cartIn);
 }
 
 /*
