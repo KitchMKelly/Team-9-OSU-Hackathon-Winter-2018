@@ -61,6 +61,11 @@ void Video::addToVector(Video videoIn)
     videos.push_back(videoIn);
 }
 
+/*
+searchTitle() is not used; see "void titleSearchVector(const vector<Video>& videos, 
+vector<Video>& results, string titleIn)" for function that searches through movie dataset,
+and compares to user input under "Title Search Submenu Functions" in BawkBusterFunctions.cpp
+*/
 void Video::searchTitle(const std::vector<Video>& videos, std::string titleIn)
 {
     Video result, temp;
