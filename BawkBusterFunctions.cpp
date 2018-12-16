@@ -560,7 +560,7 @@ void moviesInCartMain(Cart cartIn)
 	displayMoviesInCart(cartIn);
 	cout << "You have " << cartIn.getNumCart() << " movies in your Cart.\n";
 	cout << "The total price is $" << cartIn.getTPrice() << "\n\n";
-	cout << "Would you like to:";
+	cout << "Would you like to:\n";
 	cout << "	1. Check Out?\n";
 	cout << "	2. Clear Cart?\n";
 	cout << "	3. Remove Last Item Added?\n";
