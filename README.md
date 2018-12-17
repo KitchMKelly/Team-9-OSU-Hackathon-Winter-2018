@@ -13,6 +13,12 @@ Build Version 1
 
 ![alt text](http://i.imgur.com/QO41eLL.png "main menu")
 
+### Installation
+There are multiple ways to run the program:
+* Run it using Repl.it [here](https://repl.it/@herbishere/BawkBustersCatalog?language=cpp)
+* Use the Makefile to compile and run the "main" program that is made.
+* Compile the "main.cpp", "BawkBusterFunctions.cpp", "Video.cpp", and "Cart.cpp" and run the resulting file
+
 ### Features
 * Menus
 * Usage of Data Sets
