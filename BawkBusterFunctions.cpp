@@ -401,7 +401,7 @@ void genreSearchMain(Cart& newCart, vector<Video>& videoList)
 			}
 			addToCart(newCart, results);	//User decides if (s)he wants to add the movie to the cart,
 							//and continues searching.
-			clearScreen();
+			//clearScreen();
 		}
 		results.clear(); //delete everything from the vector to prepare for the next search
 		//cin.clear();
