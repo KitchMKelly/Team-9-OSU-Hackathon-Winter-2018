@@ -212,7 +212,10 @@ Displays the main menu choices for the user to choose from
 void displayMainMenu()
 {
 	//clearScreen();	//Clear screen before displaying menu
-	cout << "Welcome to BawkBuster!\n" << endl;
+	cout << ":::::::::::::::::::\n";
+	cout << "::..Welcome to...::\n";
+	cout << "::..BawkBuster!..::\n";
+	cout << ":::::::::::::::::::\n" << endl;
 	cout << "Select on of the following options:\n" << endl;
 	cout << "	1: Search Movies by Title" << endl;
 	cout << "	2: Search Movies by Genre" << endl;
