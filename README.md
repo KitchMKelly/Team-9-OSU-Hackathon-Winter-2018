@@ -11,7 +11,7 @@ Build Version 1
 
 ### Screenshots
 
-![alt text](http://i.imgur.com/0w1YenD.png "main menu")
+![alt text](http://i.imgur.com/QO41eLL.png "main menu")
 
 ### Features
 * Menus
