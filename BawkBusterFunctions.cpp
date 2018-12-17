@@ -58,16 +58,13 @@ that functions with Windows and Linux operating systems.
 
 void clearScreen()
 {
-	/*clear screen is not possible in repl.it, so using different option
+	//clear screen is not possible in repl.it, so using different option
 	#ifdef _WIN32
 		std::system("cls");
 	#else
 		//Assume POSIX
-		std::system("clear");
+		write(1,"\E[H\E[2J",7);
 	#endif
-	*/
-
-	cout << string(100, '\n');
 }
 
 /****************************************************************************************
