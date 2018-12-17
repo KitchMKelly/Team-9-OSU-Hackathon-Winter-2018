@@ -216,7 +216,7 @@ void displayMainMenu()
 	cout << "::..Welcome to...::\n";
 	cout << "::..BawkBuster!..::\n";
 	cout << ":::::::::::::::::::\n" << endl;
-	cout << "Select on of the following options:\n" << endl;
+	cout << "Select One of the Following Options:\n" << endl;
 	cout << "	1: Search Movies by Title" << endl;
 	cout << "	2: Search Movies by Genre" << endl;
 	cout << "	3: Search Movies by Director" << endl;
