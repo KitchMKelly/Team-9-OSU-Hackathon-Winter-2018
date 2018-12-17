@@ -63,7 +63,7 @@ void clearScreen()
 		std::system("cls");
 	#else
 		//Assume POSIX
-		write(1,"\E[H\E[2J",7);
+		cout << "\033[2J\033[1;1H";
 	#endif
 }
 
